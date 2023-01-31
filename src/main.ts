@@ -9,8 +9,8 @@ renderer.setSize(innerWidth, innerHeight);
 
 const scene = new THREE.Scene();
 
-const camera = new THREE.PerspectiveCamera(40, innerWidth / innerHeight, 0.1, 1000);
-camera.position.set(0, 0, 50);
+const camera = new THREE.PerspectiveCamera(75, innerWidth / innerHeight, 0.1, 1000);
+camera.position.set(0, 0, 10);
 camera.lookAt(0, 0, 0)
 scene.add(camera);
 
@@ -18,12 +18,13 @@ scene.add(camera);
 const ambLight = new THREE.AmbientLight(0xffffff, 1)
 scene.add(ambLight);
 
-/* load earth gltf model */
-let earth: Object3D;
+/* earth model */
+//load model
+let earth: { [k: string]: any } = {}
 async function loadEarthModel() {
     const loader = new GLTFLoader();
     return new Promise((resolve, reject) => {
-        loader.load('/earth_globe/scene.gltf', (gltf) => {
+        loader.load('/earth_day/earth.gltf', (gltf) => {
             resolve(gltf.scene);
         }, undefined, reject);
     });
@@ -32,21 +33,46 @@ const modelPromise = loadEarthModel() as Promise<Object3D>;
 
 //after earth loads
 modelPromise.then(model => {
-    earth = model as Object3D
-    objectCenter(earth)
-    scene.add(earth)
+    console.log(model)
+    earth.radius = getRadius(model)
+    earth.model = model as Object3D
+
+    scene.add(model)
     animator();
 }).catch(error => { console.log(`Error loading model: ${error}`) })
 
-//set object center
-function objectCenter(object:Object3D) {
-    const box = new THREE.Box3().setFromObject(object);
-    const center = box.getCenter(new THREE.Vector3());
-
-    object.position.x += (object.position.x - center.x);
-    object.position.y += (object.position.y - center.y);
-    object.position.z += (object.position.z - center.z);
+//get radius
+function getRadius(object: Object3D) {
+    const box = new THREE.Box3().setFromObject(object)
+    return box.max.x
 }
+
+// Define a function to update the camera's position
+function updateEarthRotation(lat: number, lon: number, radius: number) {
+    const radians = Math.PI / 180;
+    // Convert the longitude and latitude values to radians
+    const radLat = (90 - lat) * radians;
+    const radLon= (lon + 180) * radians;
+
+    camera.position.x = Math.cos(radLat) * Math.cos(radLon) * (radius+5);
+    camera.position.y = Math.sin(radLat) * (radius+5);
+    camera.position.z = Math.cos(radLat) * Math.sin(radLon) * (radius+5);
+
+    camera.lookAt(0, 0, 0)
+}
+
+// Call the updateCameraPosition function when the user inputs longitude and latitude values
+//updateCameraPosition(51, -5, earth.radius)
+
+const latInput = document.getElementById("lat-input") as HTMLInputElement;
+const lonInput = document.getElementById("lon-input") as HTMLInputElement;
+const submitBtn = document.getElementById("submit-button") as HTMLButtonElement;
+
+submitBtn.addEventListener("click", () => {
+    const longitude = parseFloat(lonInput.value);
+    const latitude = parseFloat(latInput.value);
+    updateEarthRotation(longitude, latitude, earth.radius);
+});
 
 
 /* resize */
@@ -61,5 +87,5 @@ renderer.render(scene, camera);
 function animator() {
     requestAnimationFrame(animator);
     renderer.render(scene, camera);
-    earth.rotation.y += 0.00025
+    //earth.model.rotation.y += 0.00025
 }

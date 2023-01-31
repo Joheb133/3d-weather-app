@@ -1,13 +1,23 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <script type="module" src="/src/main.ts" defer></script>
-    <link rel="stylesheet" href="/src/style.css">
-    <title></title>
-  </head>
-  <body>
-    <canvas></canvas>
-  </body>
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <script type="module" src="/src/main.ts" defer></script>
+  <link rel="stylesheet" href="/src/style.css">
+  <title></title>
+</head>
+
+<body>
+  <canvas></canvas>
+  <div style="position: absolute; top: 0; left: 0; z-index: 5;" class="input">
+    <form>
+      <input type="number" id="lat-input"><br>
+      <input type="number" id="lon-input"><br>
+    </form>
+    <button id="submit-button">Submit</button>
+  </div>
+</body>
+
 </html>
