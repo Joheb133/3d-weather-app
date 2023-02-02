@@ -40,6 +40,12 @@
                 3
             ],
             "name" : "pSphere2",
+            "rotation" : [
+                0,
+                0.7071067690849304,
+                0,
+                0.7071068286895752
+            ],
             "scale" : [
                 10.250269889831543,
                 10.250269889831543,
@@ -55,7 +61,13 @@
             "children" : [
                 4
             ],
-            "name" : "RootNode"
+            "name" : "RootNode",
+            "rotation" : [
+                0,
+                0.7071068286895752,
+                0,
+                0.7071068286895752
+            ]
         },
         {
             "children" : [
@@ -80,10 +92,10 @@
             ],
             "name" : "Sketchfab_model",
             "rotation" : [
-                -0.7071068286895752,
+                0.7071068286895752,
                 0,
                 0,
-                0.7071068286895752
+                -0.7071067094802856
             ],
             "scale" : [
                 50,
@@ -115,7 +127,7 @@
                     }
                 }
             },
-            "name" : "earthday",
+            "name" : "earthday.003",
             "normalTexture" : {
                 "index" : 2
             },
@@ -132,7 +144,7 @@
     ],
     "meshes" : [
         {
-            "name" : "pSphere2_earthday_0",
+            "name" : "pSphere2_earthday_0.012",
             "primitives" : [
                 {
                     "attributes" : {
@@ -146,7 +158,7 @@
             ]
         },
         {
-            "name" : "pSphere2_earthday_0.001",
+            "name" : "pSphere2_earthday_0.013",
             "primitives" : [
                 {
                     "attributes" : {
@@ -160,7 +172,7 @@
             ]
         },
         {
-            "name" : "pSphere2_earthday_0.002",
+            "name" : "pSphere2_earthday_0.014",
             "primitives" : [
                 {
                     "attributes" : {
@@ -174,7 +186,7 @@
             ]
         },
         {
-            "name" : "pSphere2_earthday_0.003",
+            "name" : "pSphere2_earthday_0.015",
             "primitives" : [
                 {
                     "attributes" : {
