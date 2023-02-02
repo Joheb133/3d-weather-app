@@ -1,7 +1,7 @@
 import * as THREE from 'three';
 import { Object3D } from 'three';
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader';
-
+import { gsap } from 'gsap';
 /* SETUP: renderer, scene & camera */
 const canvas = document.querySelector("canvas") as HTMLCanvasElement;
 const renderer = new THREE.WebGLRenderer({ canvas: canvas, antialias: true });
@@ -54,11 +54,19 @@ function updateEarthRotation(lat: number, lon: number, radius: number) {
     const radLat = (90 - lat) * radians;
     const radLon= (lon + 180) * radians;
 
-    camera.position.x = Math.cos(radLat) * Math.cos(radLon) * (radius+5);
-    camera.position.y = Math.sin(radLat) * (radius+5);
-    camera.position.z = Math.cos(radLat) * Math.sin(radLon) * (radius+5);
+    const pos = {
+        x: Math.cos(radLat) * Math.cos(radLon) * (radius+5),
+        y: Math.sin(radLat) * (radius+5),
+        z: Math.cos(radLat) * Math.sin(radLon) * (radius+5)
+    }
 
-    camera.lookAt(0, 0, 0)
+    gsap.to(camera.position, {
+        x: pos.x, y: pos.y, z: pos.z,
+        duration: 1,
+        onUpdate: ()=>{
+            camera.lookAt(0, 0, 0)
+        }
+    })
 }
 
 // Call the updateCameraPosition function when the user inputs longitude and latitude values
