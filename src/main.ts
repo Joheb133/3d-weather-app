@@ -17,31 +17,22 @@ const ambLight = new THREE.AmbientLight(0xffffff, 1)
 scene.add(ambLight);
 
 //load model test
-let earth: {[k:string]: any} = {}
+let earth: {[k:string]: any} = {radius: 6}
+
 function loadEarthModel(){
     const textureLoader = new THREE.TextureLoader();
     const textures = {
-        map: textureLoader.load('earth_day/textures/earthday_baseColor.jpg'),
-        metallic: textureLoader.load('earth_day/textures/earthday_metallicRoughness.jpg'),
-        roughness: textureLoader.load('earth_day/textures/earthday_clearcoat-earthday_clearcoat_roughness.png'),
-        normal: textureLoader.load('earth_day/textures/earthday_normal.png')
+        map: textureLoader.load('earth_day/textures/earthday_baseColor.jpg')
     }
 
-    const model = new THREE.Mesh(new THREE.SphereGeometry(6.371, 128, 128), new THREE.MeshStandardMaterial({
+    const model = new THREE.Mesh(new THREE.SphereGeometry(earth.radius, 128, 128), new THREE.MeshStandardMaterial({
         map: textures.map,
-        metalnessMap: textures.metallic,
-        roughnessMap: textures.roughness,
-        normalMap: textures.normal
     }))
 
-    console.log(model)
-
-    earth.radius = 6.371;
-    earth.model = model;
-
     scene.add(model)
+    return model
 }
-loadEarthModel()
+earth.model = loadEarthModel()
 
 // Define a function to update the camera's position
 function updateEarthRotation(lat: number, lon: number, radius: number) {
@@ -56,7 +47,6 @@ function updateEarthRotation(lat: number, lon: number, radius: number) {
         y: Math.sin(radLat) * (radius+offset),
         z: Math.cos(radLat) * Math.sin(radLon) * (radius+offset),
     }
-    console.log(pos)
 
     gsap.to(camera.position, {
         x: pos.x, y: pos.y, z: pos.z,
