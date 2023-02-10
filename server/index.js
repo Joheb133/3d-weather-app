@@ -10,17 +10,20 @@ const app = express();
 //frontend folder (static folder)
 //app.use(express.static('dist'))
 
+// enable cors
+const corsOptions = {
+    origin: "*",
+}
+app.use(cors(corsOptions));
+
 //rate limit
 const limiter = rateLimit({
     window: 60 * 1000,
-    max: 5
+    max: 10
 });
 app.use(limiter);
 app.set('trust proxy', 1);
 //routes
 app.use('/api', router)
-
-// enable cors
-app.use(cors());
 
 app.listen(PORT, ()=> console.log(`Server running on port ${PORT}`))

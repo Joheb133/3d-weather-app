@@ -16,7 +16,7 @@ const API_KEY_VALUE = process.env.API_KEY_VALUE;
 const API_KEY_NAME = process.env.API_KEY_NAME;
 
 //express route
-router.get('/', cache('5 minutes'), async (req, res) => {
+router.get('/', cache('10 minutes'), async (req, res) => {
     try {
         const params = new URLSearchParams({
             [API_KEY_NAME]: API_KEY_VALUE,

@@ -61,15 +61,23 @@ function updateEarthRotation(lat: number, lon: number, radius: number) {
 // Call the updateCameraPosition function when the user inputs longitude and latitude values
 //updateCameraPosition(51, -5, earth.radius)
 
-const latInput = document.getElementById("lat-input") as HTMLInputElement;
-const lonInput = document.getElementById("lon-input") as HTMLInputElement;
+const locInput = document.getElementById("location-input") as HTMLInputElement;
 const submitBtn = document.getElementById("submit-button") as HTMLButtonElement;
 
-submitBtn.addEventListener("click", () => {
-    const longitude = parseFloat(lonInput.value);
-    const latitude = parseFloat(latInput.value);
-    updateEarthRotation(latitude, longitude, earth.radius);
+submitBtn.addEventListener("click", async function() {
+    if(locInput.value == "") return
+    const data = await getWeather(locInput.value);
+    locInput.value = "";
+    updateEarthRotation(data.coord.lat, data.coord.lon, earth.radius);
+    console.log(data)
 });
+
+//weather api fetch requst
+async function getWeather(location: string) {
+    const res = await fetch(`http://127.0.0.1:5000/api?q=${location}`)
+    const data = await res.json();
+    return data
+}
 
 
 /* resize */
