@@ -4,28 +4,19 @@
   "version": "0.0.0",
   "type": "module",
   "scripts": {
-    "start": "node server/index",
-    "b-dev": "nodemon server/index",
-    "f-dev": "vite",
+    "dev": "vite",
     "build": "tsc && vite build",
     "preview": "vite preview"
   },
   "devDependencies": {
     "@types/node": "^18.11.18",
     "@types/three": "^0.149.0",
-    "nodemon": "^2.0.20",
     "tslib": "^2.5.0",
     "typescript": "^4.9.3",
     "vite": "^4.0.4"
   },
   "dependencies": {
-    "apicache": "^1.6.3",
-    "cors": "^2.8.5",
-    "dotenv": "^16.0.3",
-    "express": "^4.18.2",
-    "express-rate-limit": "^6.7.0",
     "gsap": "^3.11.4",
-    "needle": "^3.2.0",
     "three": "^0.149.0"
   }
 }
