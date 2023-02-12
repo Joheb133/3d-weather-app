@@ -9,14 +9,14 @@ import apicache from 'apicache';
 let cache = apicache.middleware
 
 
-const router = express.Router();
+const weatherRouter = express.Router();
 
 //Env vars
 const API_KEY_VALUE = process.env.API_KEY_VALUE;
 const API_KEY_NAME = process.env.API_KEY_NAME;
 
 //express route
-router.get('/', cache('10 minutes'), async (req, res) => {
+weatherRouter.get('/', cache('5 minutes'), async (req, res) => {
     try {
         const params = new URLSearchParams({
             [API_KEY_NAME]: API_KEY_VALUE,
@@ -31,4 +31,4 @@ router.get('/', cache('10 minutes'), async (req, res) => {
     }
 })
 
-export default router
+export default weatherRouter
