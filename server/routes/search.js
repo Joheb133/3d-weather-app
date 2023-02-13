@@ -63,7 +63,7 @@ searchRouter.get('/', async (req, res) => {
                 }
             }
 
-            //constant(userSearch)
+            constant(userSearch)
 
             res.status(200).json(searchList)
         }

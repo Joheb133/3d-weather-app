@@ -59,22 +59,42 @@ function updateEarthRotation(lat: number, lon: number, radius: number) {
 }
 
 // Call the updateCameraPosition function when the user inputs longitude and latitude values
-//updateCameraPosition(51, -5, earth.radius)
 
 const locInput = document.getElementById("location-input") as HTMLInputElement;
 const submitBtn = document.getElementById("submit-button") as HTMLButtonElement;
 
 submitBtn.addEventListener("click", async function() {
-    if(locInput.value == "") return
-    const data = await getWeather(locInput.value);
-    locInput.value = "";
-    updateEarthRotation(data.coord.lat, data.coord.lon, earth.radius);
-    console.log(data)
+    const input = searchText(locInput);
+    const city = await getSearch(input);
+    if(city.error === 'no city found'){
+        console.log('no city')
+    } else {
+        console.log(city)
+    }
 });
 
 //weather api fetch requst
 async function getWeather(location: string) {
     const res = await fetch(`http://127.0.0.1:5000/weather?q=${location}`)
+    const data = await res.json();
+    return data
+}
+
+//search api text validation
+function searchText(input: HTMLInputElement) {
+    let string = ''
+    for (let i = 0; i < input.value.length; i++) {
+        if(input.value.charAt(i) === ' '){
+            string += '%20'
+        } else {
+            string += input.value.charAt(i)
+        }
+    }
+    return string
+}
+
+async function getSearch(location: string) {
+    const res = await fetch(`http://127.0.0.1:5000/search?name=${location}`);
     const data = await res.json();
     return data
 }
