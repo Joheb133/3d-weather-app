@@ -17,6 +17,19 @@ async function readJSONFile(filepath) {
 //cities data
 const data = await readJSONFile("server/data/city.json");
 
+//creates hash table
+/* example of hash table
+    {
+        dublin: [
+            {city: Dublin, country: 'US'},
+            {city: Dublin, country: 'IE'},
+            {city: Dublin, country: 'US'}
+        ]
+    }
+    //In my case, the key dublin has multiple elements all with the city name of dublin. If there are
+    countries with the same city name they're added to the same bucket. I can then access the bucket by using
+    the key
+*/
 function createMap() {
     const obj = {};
     data.forEach(element => {
@@ -43,17 +56,6 @@ searchRouter.get('/', async (req, res) => {
             const userSearch = req.query.name //return value for key called name in URL
             userSearch.toLowerCase()
 
-            function linear(search) {
-                //each element in JSON file
-                data.forEach(element => {
-                    //city = user req
-                    if (element.name.toLowerCase() === search) {
-                        searchList.push(element)
-                    }
-                });
-            }
-            //linear(userSearch);
-
             function constant(search) {
                 searchList = map[search]
                 if (searchList === undefined) {
@@ -61,7 +63,7 @@ searchRouter.get('/', async (req, res) => {
                 }
             }
 
-            constant(userSearch)
+            //constant(userSearch)
 
             res.status(200).json(searchList)
         }
