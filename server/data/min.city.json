@@ -1,185 +1,5 @@
 [
     {
-        "id": 2964496,
-        "name": "Dunmanway",
-        "state": "",
-        "country": "IE",
-        "coord": {
-            "lon": -9.11667,
-            "lat": 51.716671
-        }
-    },
-    {
-        "id": 2964503,
-        "name": "Dunlewy",
-        "state": "",
-        "country": "IE",
-        "coord": {
-            "lon": -8.1,
-            "lat": 55.01667
-        }
-    },
-    {
-        "id": 2964504,
-        "name": "Dunleer",
-        "state": "",
-        "country": "IE",
-        "coord": {
-            "lon": -6.39611,
-            "lat": 53.834999
-        }
-    },
-    {
-        "id": 2964506,
-        "name": "Dún Laoghaire",
-        "state": "",
-        "country": "IE",
-        "coord": {
-            "lon": -6.13586,
-            "lat": 53.293949
-        }
-    },
-    {
-        "id": 2964507,
-        "name": "Dunlavin",
-        "state": "",
-        "country": "IE",
-        "coord": {
-            "lon": -6.70389,
-            "lat": 53.055561
-        }
-    },
-    {
-        "id": 2964516,
-        "name": "Dunkerrin",
-        "state": "",
-        "country": "IE",
-        "coord": {
-            "lon": -7.90889,
-            "lat": 52.91222
-        }
-    },
-    {
-        "id": 2964521,
-        "name": "Dunhill",
-        "state": "",
-        "country": "IE",
-        "coord": {
-            "lon": -7.25694,
-            "lat": 52.16972
-        }
-    },
-    {
-        "id": 2964523,
-        "name": "Dungourney",
-        "state": "",
-        "country": "IE",
-        "coord": {
-            "lon": -8.09722,
-            "lat": 51.96833
-        }
-    },
-    {
-        "id": 2964524,
-        "name": "Dungloe",
-        "state": "",
-        "country": "IE",
-        "coord": {
-            "lon": -8.35917,
-            "lat": 54.951111
-        }
-    },
-    {
-        "id": 2964527,
-        "name": "Dungarvan",
-        "state": "",
-        "country": "IE",
-        "coord": {
-            "lon": -7.08722,
-            "lat": 52.589722
-        }
-    },
-    {
-        "id": 2964528,
-        "name": "Dungarvan",
-        "state": "",
-        "country": "IE",
-        "coord": {
-            "lon": -7.62528,
-            "lat": 52.088058
-        }
-    },
-    {
-        "id": 2964529,
-        "name": "Dunganstown",
-        "state": "",
-        "country": "IE",
-        "coord": {
-            "lon": -6.97444,
-            "lat": 52.342781
-        }
-    },
-    {
-        "id": 2964532,
-        "name": "Dundrum",
-        "state": "",
-        "country": "IE",
-        "coord": {
-            "lon": -6.25714,
-            "lat": 53.290668
-        }
-    },
-    {
-        "id": 2964533,
-        "name": "Dundrum",
-        "state": "",
-        "country": "IE",
-        "coord": {
-            "lon": -8.04222,
-            "lat": 52.560558
-        }
-    },
-    {
-        "id": 2964535,
-        "name": "Dunderry",
-        "state": "",
-        "country": "IE",
-        "coord": {
-            "lon": -6.77417,
-            "lat": 53.605831
-        }
-    },
-    {
-        "id": 2964540,
-        "name": "Dundalk",
-        "state": "",
-        "country": "IE",
-        "coord": {
-            "lon": -6.41667,
-            "lat": 54.0
-        }
-    },
-    {
-        "id": 2964542,
-        "name": "Duncormick",
-        "state": "",
-        "country": "IE",
-        "coord": {
-            "lon": -6.64583,
-            "lat": 52.225281
-        }
-    },
-    {
-        "id": 2964547,
-        "name": "Dunboyne",
-        "state": "",
-        "country": "IE",
-        "coord": {
-            "lon": -6.46667,
-            "lat": 53.400002
-        }
-    },
-    {
         "id": 2964558,
         "name": "Duleek",
         "state": "",
@@ -208,15 +28,23 @@
             "lon": -8.0,
             "lat": 53.933331
         }
-    },
-    {
-        "id": 2964584,
-        "name": "Drumshanbo",
+    },    {
+        "id": 2964574,
+        "name": "Dublin",
         "state": "",
         "country": "IE",
         "coord": {
-            "lon": -8.03333,
-            "lat": 54.049999
+            "lon": -6.26719,
+            "lat": 53.34399
+        }
+    },    {
+        "id": 2964574,
+        "name": "Dublin",
+        "state": "",
+        "country": "IE",
+        "coord": {
+            "lon": -6.26719,
+            "lat": 53.34399
         }
     }
 ]
