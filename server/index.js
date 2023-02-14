@@ -9,7 +9,7 @@ const PORT = 5000;
 const app = express();
 
 //frontend folder (static folder)
-//app.use(express.static('dist'))
+app.use(express.static('dist'))
 
 // enable cors
 const corsOptions = {
