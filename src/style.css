@@ -1,0 +1,72 @@
+body {
+    margin: 0;
+    padding: 0;
+}
+
+canvas {
+    display: block;
+}
+
+.dot {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: red;
+    width: 4px;
+    height: 4px;
+    z-index: 5;
+}
+
+.line1 {
+    position: absolute;
+    background-color: red;
+    width: 4px;
+    height: 92px;
+    top: 0;
+    left: 50%;
+    transform: translate(-50%, 0);
+    z-index: 5; 
+}
+
+.line2 {
+    position: absolute;
+    background-color: red;
+    width: 4px;
+    height: 92px;
+    bottom: 0;
+    left: 50%;
+    transform: translate(-50%, 0);
+    z-index: 5; 
+}
+
+#location-input {
+    width: 240px;
+    height: 20px;
+}
+
+.input .response {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.input .response li{
+    width: 240px;
+    height: 20px;
+    padding: 3px;
+}
+
+.input .response li:hover {
+    opacity: 0.95;
+    transition: 100ms;
+    cursor: pointer;
+}
+
+.input .response li:nth-child(2n) {
+    background-color: rgb(252, 252, 252);
+}
+
+.input .response li:nth-child(2n+1) {
+    background-color: rgb(248, 248, 248);
+}

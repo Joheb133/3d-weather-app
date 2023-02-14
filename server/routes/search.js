@@ -53,13 +53,12 @@ searchRouter.get('/', async (req, res) => {
         } else {
             let searchList = []
 
-            const userSearch = req.query.name //return value for key called name in URL
-            userSearch.toLowerCase()
+            const userSearch = req.query.name.toLowerCase() //return value for key called name in URL
 
             function constant(search) {
                 searchList = map[search]
                 if (searchList === undefined) {
-                    searchList = { error: 'no city found' }
+                    searchList = { error: 'city not found' }
                 }
             }
 

@@ -5,7 +5,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <script type="module" src="src/main.ts" defer></script>
-  <link rel="stylesheet" href="public/style.css">
+  <link rel="stylesheet" href="src/style.css">
   <title></title>
 </head>
 
@@ -15,8 +15,10 @@
   <div class="line2"></div>
   <canvas></canvas>
   <div style="position: absolute; top: 0; left: 0; z-index: 5;" class="input">
-    <input type="text" id="location-input"><br>
-    <button id="submit-button">Submit</button>
+    <div class="search-bar-wrap">
+      <input  type="text" id="location-input" placeholder="City">
+      <button id="submit-button">Submit</button>
+    </div>
   </div>
 </body>
 
