@@ -1,5 +1,8 @@
 import express from "express";
 import { readFile } from "fs/promises";
+import apicache from 'apicache'
+
+let cache = apicache.middleware
 
 const searchRouter = express.Router()
 
@@ -46,7 +49,7 @@ function createMap() {
 
 const map = createMap();
 
-searchRouter.get('/', async (req, res) => {
+searchRouter.get('/', cache('10 minutes'), async (req, res) => {
     try {
         if (!data) {
             res.status(500).json('Failed to load JSON file')
