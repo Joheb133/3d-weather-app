@@ -5,18 +5,22 @@ const searchContainer = document.querySelector(".input") as HTMLDivElement;
 
 export function removeUl() {
     const ul = document.querySelector('.response') as HTMLUListElement
-    ul.remove();
+    //ul.remove();
 
     //remove event listeners
     Array.from(ul.children).forEach(element => {
-        element.removeEventListener('click', async ()=>{});
+        element.removeEventListener('click', ()=>{});
     });
+    
 }
 
-export function createUl(city: Array<{ [key: string]: any}>) {
+export function createUl(city: Array<{ [key: string]: any }>) {
+    return new Promise((resolve, reject) => {
+
+
         //li limit
         let limit
-        if(city.length > 5) {
+        if (city.length > 5) {
             limit = 5;
         } else {
             limit = city.length
@@ -25,7 +29,7 @@ export function createUl(city: Array<{ [key: string]: any}>) {
         //create location buttons
         let newUl = document.createElement("ul");
         newUl.className = 'response'
-        for(let i = 0; i < limit; i++){
+        for (let i = 0; i < limit; i++) {
             //create li
             let newLi = document.createElement("li")
             newLi.innerText = `${city[i].name}, ${city[i].country}`
@@ -39,6 +43,7 @@ export function createUl(city: Array<{ [key: string]: any}>) {
                 console.log(res)
                 removeUl();
                 locInput.value = '';
+                resolve({lat, lon})
             })
 
             //add li to ul
@@ -47,4 +52,5 @@ export function createUl(city: Array<{ [key: string]: any}>) {
 
         //add locations buttons to DOM
         searchContainer.appendChild(newUl)
+    });
 }

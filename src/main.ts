@@ -1,5 +1,6 @@
 import scene from './3d/scene';
 import Earth from './3d/components/earth';
+import updateEarthRotation from './3d/utils/earthRotation';
 import search from './api/search';
 import { createUl, removeUl} from './utils/searchList';
 
@@ -33,7 +34,10 @@ submitBtn.addEventListener("click", async function() {
         locInput.value = '';
     } else {
         locInput.placeholder = 'City';
-        createUl(city);
+        createUl(city).then((value)=>{
+            const coords = value as {[key: string]: number}
+            updateEarthRotation(myScene.camera, coords.lat, coords.lon, 6)
+        });
     }
 });
 
