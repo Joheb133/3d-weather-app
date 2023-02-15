@@ -37,6 +37,8 @@ submitBtn.addEventListener("click", async function() {
         createUl(city).then((value)=>{
             const coords = value as {[key: string]: number}
             updateEarthRotation(myScene.camera, coords.lat, coords.lon, 6)
+        }).catch((error)=>{
+            console.log(error)
         });
     }
 });

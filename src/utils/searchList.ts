@@ -10,7 +10,7 @@ export function removeUl() {
 
 export function createUl(city: Array<{ [key: string]: any }>) {
     return new Promise((resolve, reject) => {
-        
+
         //li limit
         let limit
         if (city.length > 5) {
@@ -31,12 +31,20 @@ export function createUl(city: Array<{ [key: string]: any }>) {
             const lon = city[i].coord.lon as number;
 
             //add event listener
-            newLi.addEventListener('click', async ()=>{
+            newLi.addEventListener('click', async () => {
                 removeUl();
-                const res = await getWeather(lat, lon); //need to handle weather errors
-                console.log(res)
-                locInput.value = '';
-                resolve({lat, lon})
+
+                const res = await getWeather(lat, lon);
+
+                //weather api error handler
+                if (res.cod != 200 || res.serverError) {
+                    reject(res)
+                } else {
+                    console.log(res)
+                    locInput.value = '';
+                    resolve({ lat, lon })
+                }
+
             })
 
             //add li to ul
