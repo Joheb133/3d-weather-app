@@ -5,19 +5,12 @@ const searchContainer = document.querySelector(".input") as HTMLDivElement;
 
 export function removeUl() {
     const ul = document.querySelector('.response') as HTMLUListElement
-    //ul.remove();
-
-    //remove event listeners
-    Array.from(ul.children).forEach(element => {
-        element.removeEventListener('click', ()=>{});
-    });
-    
+    ul.remove();
 }
 
 export function createUl(city: Array<{ [key: string]: any }>) {
     return new Promise((resolve, reject) => {
-
-
+        
         //li limit
         let limit
         if (city.length > 5) {
@@ -39,9 +32,9 @@ export function createUl(city: Array<{ [key: string]: any }>) {
 
             //add event listener
             newLi.addEventListener('click', async ()=>{
+                removeUl();
                 const res = await getWeather(lat, lon); //need to handle weather errors
                 console.log(res)
-                removeUl();
                 locInput.value = '';
                 resolve({lat, lon})
             })
