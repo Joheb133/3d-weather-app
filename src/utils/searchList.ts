@@ -31,6 +31,7 @@ export function createUl(city: Array<{ [key: string]: any }>): Promise<any> {
                 ul.remove();
  
                 const res = await getWeather(lat, lon);
+                
                 //weather api error handler
                 if (res.cod != 200 || res.serverError) {
                     reject(res)
