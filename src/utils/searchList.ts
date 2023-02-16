@@ -1,14 +1,8 @@
 import getWeather from "../api/weather";
 
-const locInput = document.getElementById("location-input") as HTMLInputElement;
 const searchContainer = document.querySelector(".input") as HTMLDivElement;
 
-export function removeUl() {
-    const ul = document.querySelector('.response') as HTMLUListElement
-    ul.remove();
-}
-
-export function createUl(city: Array<{ [key: string]: any }>) {
+export function createUl(city: Array<{ [key: string]: any }>): Promise<any> {
     return new Promise((resolve, reject) => {
 
         //li limit
@@ -22,6 +16,7 @@ export function createUl(city: Array<{ [key: string]: any }>) {
         //create location buttons
         let newUl = document.createElement("ul");
         newUl.className = 'response'
+
         for (let i = 0; i < limit; i++) {
             //create li
             let newLi = document.createElement("li")
@@ -32,17 +27,15 @@ export function createUl(city: Array<{ [key: string]: any }>) {
 
             //add event listener
             newLi.addEventListener('click', async () => {
-                removeUl();
-
+                const ul = document.querySelector('.response') as HTMLUListElement
+                ul.remove();
+ 
                 const res = await getWeather(lat, lon);
-
                 //weather api error handler
                 if (res.cod != 200 || res.serverError) {
                     reject(res)
                 } else {
-                    console.log(res)
-                    locInput.value = '';
-                    resolve({ lat, lon })
+                    resolve(res)
                 }
 
             })

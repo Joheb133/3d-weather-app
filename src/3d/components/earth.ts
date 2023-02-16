@@ -1,4 +1,4 @@
-import * as THREE from "three";
+import { Mesh, SphereGeometry, MeshStandardMaterial, TextureLoader } from "three";
 
 //load model test
 export default class Earth {
@@ -10,12 +10,12 @@ export default class Earth {
     }
 
     private async loadEarthModel() {
-        const textureLoader = new THREE.TextureLoader();
+        const textureLoader = new TextureLoader();
         const textures = {
             map: textureLoader.loadAsync('textures/earthday_baseColor.jpg')
         }
     
-        const model = new THREE.Mesh(new THREE.SphereGeometry(this.radius, 128, 128), new THREE.MeshStandardMaterial({
+        const model = new Mesh(new SphereGeometry(this.radius, 128, 128), new MeshStandardMaterial({
             map: await textures.map,
         }))
 
