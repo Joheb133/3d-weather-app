@@ -19,12 +19,21 @@ const submitBtn = document.getElementById("submit-button") as HTMLButtonElement;
 const tempEl = document.querySelector('#temp-el') as HTMLSpanElement;
 
 submitBtn.addEventListener("click", async function() {
+    let input = locInput.value;
+    let country = "";
     //if ul res already exists
     if(document.querySelector('.response')) {
         document.querySelector('.response')?.remove();
     }
 
-    const city = await search(locInput.value);
+    //if user specify country
+    if(locInput.value.includes(",")) {
+        country = input.slice(input.indexOf(",")+1, input.length)
+        country = country.trimStart()
+        input = input.slice(0, input.indexOf(","))
+    }
+
+    const city = await search(input);
 
     if(city.error === 'city not found') {
         locInput.placeholder = city.error
@@ -35,7 +44,7 @@ submitBtn.addEventListener("click", async function() {
         locInput.value = '';
     } else {
         locInput.placeholder = 'City';
-        createUl(city).then((value)=>{
+        createUl(city, country).then((value)=>{
             locInput.value = '';
             tempEl.innerText = `${value.main.temp}°`
             updateEarthRotation(myScene.camera, value.coord.lat, value.coord.lon, 6)

@@ -1,9 +1,32 @@
 import getWeather from "../api/weather";
 
+interface City {
+    id: number;
+    name: string;
+    state: string;
+    country: string;
+    coord: {
+        lon: number;
+        lat: number;
+    };
+}
+
 const searchContainer = document.querySelector(".input") as HTMLDivElement;
 
-export function createUl(city: Array<{ [key: string]: any }>): Promise<any> {
+export function createUl(city: Array<City>, countryParam?: string): Promise<any> {
     return new Promise((resolve, reject) => {
+        //check for country param
+        if(countryParam != "") {
+            const list: Array<City> = [];
+            city.forEach(element =>{
+                if(element.country.toLowerCase() == countryParam) {
+                    list.push(element)
+                }
+            })
+            if(list.length > 0) {
+                city = list
+            }
+        }
 
         //li limit
         let limit
