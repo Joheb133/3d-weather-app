@@ -21,7 +21,7 @@ const tempEl = document.querySelector('#temp-el') as HTMLSpanElement;
 submitBtn.addEventListener("click", async function() {
     //if ul res already exists
     if(document.querySelector('.response')) {
-        document.querySelector('resposne')?.remove();
+        document.querySelector('.response')?.remove();
     }
 
     const city = await search(locInput.value);
