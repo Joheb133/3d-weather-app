@@ -48,7 +48,8 @@ submitBtn.addEventListener("click", async function() {
         locInput.placeholder = 'City';
         createUl(city, country).then((value)=>{
             locInput.value = '';
-            tempEl.innerText = `${value.main.temp}°`
+            temp.value = value.main.temp
+            addTempEl();
             updateEarthRotation(myScene.camera, value.coord.lat, value.coord.lon, 6)
         }).catch((error)=>{
             console.log(error)
@@ -57,3 +58,40 @@ submitBtn.addEventListener("click", async function() {
     
 });
 
+//temperature conversion
+const tempBtn = document.querySelector("#temp-toggle-btn") as HTMLButtonElement;
+let temp = {
+    c: true,
+    f: false,
+    value: "" as any
+}
+
+tempBtn.addEventListener("click", ()=>{
+    if(temp.value == "") return 
+    if(temp.c) {
+        temp.c = false;
+        temp.f = true;
+    } else if(temp.f) {
+        temp.c = true;
+        temp.f = false;
+    };
+    addTempEl();
+})
+
+function addTempEl() {
+    if(temp.c) {
+        tempEl.innerText = `${kelvinToC(temp.value).toFixed(1)}°`
+        tempBtn.innerText = 'F°'
+    } else if(temp.f) {
+        tempEl.innerText = `${kelvinToF(temp.value).toFixed(1)}°`
+        tempBtn.innerText = 'C°'
+    }
+}
+
+function kelvinToC(kelvin: number) {
+    return kelvin - 273.15
+}
+
+function kelvinToF(kelvin: number) {
+    return (kelvin - 273.15) * 1.8 + 32
+}
