@@ -19,8 +19,10 @@ export default class scene {
         scene.add(camera);
 
         /* lighting */
-        const ambLight = new THREE.AmbientLight(0xffffff, 1)
-        scene.add(ambLight);
+        const ambLight = new THREE.AmbientLight(0xffffff, 0.1)
+        const dirLight = new THREE.DirectionalLight(0xffffff, 1)
+        dirLight.position.set(10, 10, 10)
+        scene.add(ambLight, dirLight);
 
         /* resize */
         window.addEventListener("resize", () => {

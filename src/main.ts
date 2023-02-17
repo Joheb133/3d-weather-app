@@ -1,5 +1,5 @@
 import scene from './3d/scene';
-import Earth from './3d/components/earth';
+import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader';
 import updateEarthRotation from './3d/utils/earthRotation';
 import search from './api/search';
 import { createUl} from './utils/searchList';
@@ -8,10 +8,12 @@ import { createUl} from './utils/searchList';
 const myScene = new scene();
 
 //load earth
-const earth = new Earth();
-earth.init().then(()=>{
-    myScene.add(earth.model!)
-})
+const loader = new GLTFLoader();
+loader.load( 'models/earth-low-poly_lq/earth.gltf', function ( gltf ) {
+	myScene.add(gltf.scene)
+}, undefined, function ( error ) {
+	console.error( error );
+});
 
 // handle searching weather
 const locInput = document.getElementById("location-input") as HTMLInputElement;
