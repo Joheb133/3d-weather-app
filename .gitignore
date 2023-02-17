@@ -13,6 +13,7 @@ dist-ssr
 *.local
 .env
 original_data
+server/data/min.city_hash-table.json
 
 # Editor directories and files
 .vscode/*
@@ -24,4 +25,3 @@ original_data
 *.njsproj
 *.sln
 *.sw?
-server/data/min.city_hash-table.json

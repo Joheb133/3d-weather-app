@@ -26,7 +26,8 @@ searchRouter.get('/', cache('10 minutes'), async (req, res) => {
         } else {
             let searchList = []
 
-            const userSearch = req.query.name.toLowerCase() //return value for key called name in URL
+            //return value in lowercase nondiacritic (no laten symbols like fada)
+            const search = req.query.name.toLowerCase().normalize("NFD").replace(/\p{Diacritic}/gu, "") 
 
             function constant(search) {
                 searchList = data[search]
@@ -35,7 +36,7 @@ searchRouter.get('/', cache('10 minutes'), async (req, res) => {
                 }
             }
 
-            constant(userSearch)
+            constant(search)
 
             res.status(200).json(searchList)
         }

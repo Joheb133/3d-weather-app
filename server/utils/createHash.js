@@ -1,4 +1,25 @@
 import { readFile, writeFile } from "fs/promises";
+import readLine from "readline";
+
+//create terminal input
+const rl = readLine.createInterface({
+    input: process.stdin,
+    output: process.stdout
+});
+
+rl.question('enter JSON file path: ', async (path) => {
+    const data = await readJSONFile(path)
+    const map = JSON.stringify(await createMap(data))
+    rl.question('file path: ', (path) => {
+        rl.question('file name: ', (name) => {
+            writeFile(`${path}/${name}`, map, "utf-8")
+                .then(() => { console.log('success: data written') })
+                .catch((err) => { console.log(err) })
+            rl.close();
+        })
+    })
+})
+
 //code to load json files
 async function readJSONFile(filepath) {
     try {
@@ -9,8 +30,6 @@ async function readJSONFile(filepath) {
         return null;
     }
 }
-
-const read = await readJSONFile("server/data/min.city.json");
 
 //creates hash table
 /* example of hash table
@@ -28,7 +47,7 @@ const read = await readJSONFile("server/data/min.city.json");
 async function createMap(data) {
     const obj = {};
     data.forEach(element => {
-        const keyLower = element.name.toLowerCase();
+        const keyLower = element.name.toLowerCase().normalize("NFD").replace(/\p{Diacritic}/gu, "");
         if (obj.hasOwnProperty(keyLower)) {
             obj[keyLower].push(element)
         } else {
@@ -38,9 +57,3 @@ async function createMap(data) {
     })
     return obj
 }
-
-const map = JSON.stringify(await createMap(read))
-
-writeFile("server/data/min.city_hash-table.json", map, 'utf-8')
-    .then(()=>{console.log('success: data written')})
-    .catch((err)=>{console.log(err)})
