@@ -1,6 +1,8 @@
 import { gsap } from 'gsap';
+import { Object3D } from 'three';
+
 // Define a function to update the camera's position
-export default function updateEarthRotation(camera: THREE.Camera, lat: number, lon: number, radius: number) {
+export default function rotateAroundSphere(object: Object3D, lat: number, lon: number, radius: number, animate: boolean = true) {
     const radians = Math.PI / 180;
     const offset = 6;
     // Convert the longitude and latitude values to radians
@@ -13,12 +15,14 @@ export default function updateEarthRotation(camera: THREE.Camera, lat: number, l
         z: Math.cos(radLat) * Math.sin(radLon) * (radius+offset),
     }
 
-    gsap.to(camera.position, {
-        x: pos.x, y: pos.y, z: pos.z,
-        duration: 2,
-        onUpdate: () => {
-            camera.lookAt(0, 0, 0)
-        },
-        ease: 'power2'
-    })
+    if(animate) {
+        gsap.to(object.position, {
+            x: pos.x, y: pos.y, z: pos.z,
+            duration: 2,
+            onUpdate: () => {
+                object.lookAt(0, 0, 0)
+            },
+            ease: 'power2'
+        })
+    }
 }

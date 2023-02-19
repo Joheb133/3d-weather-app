@@ -18,8 +18,6 @@ const dictionary: { [key: string]: any } = {
     'mist': '50'
 }
 
-
-
 loader.load("data/model.json", function (obj) {
     console.log(obj);
 

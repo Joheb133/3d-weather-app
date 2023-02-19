@@ -21,8 +21,12 @@ loader.load( 'models/earth-low-poly_lq/earth.gltf', function ( gltf ) {
 const locInput = document.getElementById("location-input") as HTMLInputElement;
 const submitBtn = document.getElementById("submit-button") as HTMLButtonElement;
 const tempEl = document.querySelector('#temp-el') as HTMLSpanElement;
+let searching = false;
 
 submitBtn.addEventListener("click", async function() {
+    if(searching) return
+    searching = true
+
     let input = locInput.value;
     let country = "";
     //if ul res already exists
@@ -57,7 +61,8 @@ submitBtn.addEventListener("click", async function() {
             console.log(error)
         });
     }
-    
+
+    searching = false
 });
 
 //temperature conversion
