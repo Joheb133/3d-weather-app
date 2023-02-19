@@ -2,7 +2,6 @@ import * as THREE from 'three'
 
 const loader = new THREE.ObjectLoader();
 let obj3ds: { [key: string]: any } = {
-    group: new THREE.Group(),
     obj: {}
 }
 
@@ -19,17 +18,15 @@ const dictionary: { [key: string]: any } = {
 }
 
 loader.load("data/model.json", function (obj) {
-    console.log(obj);
-
     const children = obj.children
+    
     children.forEach(element => {
-
         //obj key = (dictionary value = element name) : value = element
         obj3ds.obj[dictionary[element.name]] = element
     })
-    obj3ds.group = obj;
-},
 
+    obj3ds.group = obj as THREE.Group
+},
     // onProgress callback
     function (xhr) {
         console.log((xhr.loaded / xhr.total * 100) + '% loaded');

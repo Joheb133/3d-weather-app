@@ -195,7 +195,7 @@
 	"object": {
 		"uuid": "417d5fd8-84f0-4fa1-ae1c-224ebb790532",
 		"type": "Group",
-		"name": "Group",
+		"name": "weather",
 		"layers": 1,
 		"matrix": [1,0,0,0,0,1,0,0,0,0,1,0,0,0,0,1],
 		"children": [

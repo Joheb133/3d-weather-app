@@ -41,7 +41,7 @@ export default class scene {
         animator();
     }
 
-    add(object: Object3D | THREE.Mesh) {
+    add(object: Object3D | THREE.Mesh | THREE.Group) {
         this.scene.add(object)
     }
 }

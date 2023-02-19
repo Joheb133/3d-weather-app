@@ -1,21 +1,55 @@
 import scene from './3d/scene';
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader';
-import updateEarthRotation from './3d/utils/earthRotation';
+import { ObjectLoader } from 'three';
+import rotateAroundSphere from './3d/utils/earthRotation';
 import search from './api/search';
-import { createUl} from './utils/searchList';
-import obj3ds from './3d/components/weatherIcons';
+import {createUl} from './utils/searchList';
 
 
 //load scene
 const myScene = new scene();
 
 //load earth
-const loader = new GLTFLoader();
-loader.load( 'models/earth-low-poly_lq/earth.gltf', function ( gltf ) {
+const gltfLoader = new GLTFLoader();
+gltfLoader.load( 'models/earth-low-poly_lq/earth.gltf', function ( gltf ) {
+    gltf.scene.visible = false
+    gltf.scene.name = 'earth'
 	myScene.add(gltf.scene)
 }, undefined, function ( error ) {
 	console.error( error );
 });
+
+//add weather models to scene
+let obj3ds: { [key: string]: any } = {
+    obj: {}
+}
+
+const dictionary: { [key: string]: any } = {
+    'sun': '01',
+    'sun_cloud': '02',
+    'cloud': '03',
+    'clouds': '04',
+    'rain_cloud': '09',
+    'rain_sun': '10',
+    'thunder': '11',
+    'snow': '13',
+    'mist': '50'
+}
+
+const objectLoader = new ObjectLoader()
+objectLoader.load("data/model.json", function (obj) {
+    const children = obj.children
+    
+    children.forEach(element => {
+        //obj key = (dictionary value = element name) : value = element
+        obj3ds.obj[dictionary[element.name]] = element
+    })
+
+    obj3ds.group = obj as THREE.Group
+    myScene.add(obj3ds.group)
+})
+
+
 
 // handle searching weather
 const locInput = document.getElementById("location-input") as HTMLInputElement;
@@ -56,7 +90,7 @@ submitBtn.addEventListener("click", async function() {
             locInput.value = '';
             temp.value = value.main.temp
             addTempEl();
-            updateEarthRotation(myScene.camera, value.coord.lat, value.coord.lon, 6)
+            rotateAroundSphere(myScene.camera, value.coord.lat, value.coord.lon, 6)
         }).catch((error)=>{
             console.log(error)
         });
@@ -102,6 +136,3 @@ function kelvinToC(kelvin: number) {
 function kelvinToF(kelvin: number) {
     return (kelvin - 273.15) * 1.8 + 32
 }
-
-
-console.log(obj3ds);
