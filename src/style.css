@@ -7,39 +7,6 @@ canvas {
     display: block;
 }
 
-.dot {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    background-color: red;
-    width: 4px;
-    height: 4px;
-    z-index: 5;
-}
-
-.line1 {
-    position: absolute;
-    background-color: red;
-    width: 4px;
-    height: 92px;
-    top: 0;
-    left: 50%;
-    transform: translate(-50%, 0);
-    z-index: 5; 
-}
-
-.line2 {
-    position: absolute;
-    background-color: red;
-    width: 4px;
-    height: 92px;
-    bottom: 0;
-    left: 50%;
-    transform: translate(-50%, 0);
-    z-index: 5; 
-}
-
 #location-input {
     width: 240px;
     height: 20px;

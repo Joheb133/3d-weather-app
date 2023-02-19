@@ -3,6 +3,8 @@ import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader';
 import updateEarthRotation from './3d/utils/earthRotation';
 import search from './api/search';
 import { createUl} from './utils/searchList';
+import obj3ds from './3d/components/weatherIcons';
+
 
 //load scene
 const myScene = new scene();
@@ -95,3 +97,6 @@ function kelvinToC(kelvin: number) {
 function kelvinToF(kelvin: number) {
     return (kelvin - 273.15) * 1.8 + 32
 }
+
+
+console.log(obj3ds);
