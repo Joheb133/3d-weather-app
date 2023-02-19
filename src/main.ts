@@ -1,6 +1,6 @@
 import scene from './3d/scene';
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader';
-import { ObjectLoader } from 'three';
+import { Object3D, ObjectLoader } from 'three';
 import rotateAroundSphere from './3d/utils/earthRotation';
 import search from './api/search';
 import {createUl} from './utils/searchList';
@@ -12,7 +12,6 @@ const myScene = new scene();
 //load earth
 const gltfLoader = new GLTFLoader();
 gltfLoader.load( 'models/earth-low-poly_lq/earth.gltf', function ( gltf ) {
-    gltf.scene.visible = false
     gltf.scene.name = 'earth'
 	myScene.add(gltf.scene)
 }, undefined, function ( error ) {
@@ -20,7 +19,12 @@ gltfLoader.load( 'models/earth-low-poly_lq/earth.gltf', function ( gltf ) {
 });
 
 //add weather models to scene
-let obj3ds: { [key: string]: any } = {
+interface Obj3ds {
+    group?: THREE.Group,
+    obj: {[key: string]: Object3D}
+}
+
+let obj3ds: Obj3ds = {
     obj: {}
 }
 
@@ -41,6 +45,8 @@ objectLoader.load("data/model.json", function (obj) {
     const children = obj.children
     
     children.forEach(element => {
+        element.scale.set(0.2, 0.2, 0.2)
+        element.position.set(0, 0, 0)
         //obj key = (dictionary value = element name) : value = element
         obj3ds.obj[dictionary[element.name]] = element
     })
@@ -90,7 +96,10 @@ submitBtn.addEventListener("click", async function() {
             locInput.value = '';
             temp.value = value.main.temp
             addTempEl();
-            rotateAroundSphere(myScene.camera, value.coord.lat, value.coord.lon, 6)
+            rotateAroundSphere(obj3ds.group!, value.coord.lat, value.coord.lon, 0)
+            rotateAroundSphere(myScene.camera, value.coord.lat, value.coord.lon, 10)
+            console.log(obj3ds.group?.position, myScene.camera.position);
+            
         }).catch((error)=>{
             console.log(error)
         });

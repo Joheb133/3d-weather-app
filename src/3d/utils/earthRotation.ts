@@ -24,5 +24,8 @@ export default function rotateAroundSphere(object: Object3D, lat: number, lon: n
             },
             ease: 'power2'
         })
+    } else {
+        object.position.set(pos.x, pos.y, pos.z)
+        object.lookAt(0, 0, 0)
     }
 }
