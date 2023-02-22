@@ -4,7 +4,6 @@ import * as THREE from 'three';
 import rotateAroundSphere from './3d/utils/earthRotation';
 import search from './api/search';
 import {createUl} from './utils/searchList';
-import { Object3D } from 'three';
 
 
 //load scene
@@ -12,7 +11,8 @@ const myScene = new scene();
 
 //load earth
 const gltfLoader = new GLTFLoader();
-gltfLoader.load( 'models/earth-low-poly_lq/earth.gltf', function ( gltf ) {
+gltfLoader.load( 'models/earth-low-poly_hq/earth.gltf', function ( gltf ) {
+    gltf.scene.scale.set(6, 6, 6)
     gltf.scene.name = 'earth'
 	myScene.add(gltf.scene)
 }, undefined, function ( error ) {
@@ -110,9 +110,8 @@ submitBtn.addEventListener('click', async function() {
             locInput.value = '';
             temp.value = value.main.temp
             addTempEl();
-            rotateAroundSphere(obj3ds.group, value.coord.lat, value.coord.lon, 12, false)
             moveIcon(value.weather[0].icon, value.coord.lat, value.coord.lon)
-            rotateAroundSphere(myScene.camera, value.coord.lat, value.coord.lon, 10)
+            rotateAroundSphere(myScene.camera, value.coord.lat, value.coord.lon, 3)
             
         }).catch((error)=>{
             console.log(error)
