@@ -11,10 +11,11 @@ const myScene = new scene();
 
 //load earth
 const gltfLoader = new GLTFLoader();
-gltfLoader.load( 'models/earth-low-poly_hq/earth.gltf', function ( gltf ) {
-    gltf.scene.scale.set(6, 6, 6)
-    gltf.scene.name = 'earth'
-	myScene.add(gltf.scene)
+gltfLoader.load( 'models/earth-low-poly_hq/earth2.glb', function ( gltf ) {
+    const model = gltf.scene;
+
+    model.scale.set(6, 6, 6)
+	myScene.add(model)
 }, undefined, function ( error ) {
 	console.error( error );
 });
@@ -54,7 +55,7 @@ objectLoader.load('data/model.json', function (obj) {
     })
     obj3ds.group.children = children
     obj3ds.group.name = 'weather';
-    myScene.add(obj3ds.group);
+    //myScene.add(obj3ds.group);
 })
 
 function moveIcon(no: string, lat: number, lon: number) {
