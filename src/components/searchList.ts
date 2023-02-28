@@ -1,15 +1,7 @@
 import getWeather from "../api/weather";
 
-interface City {
-    id: number;
-    name: string;
-    state: string;
-    country: string;
-    coord: {
-        lon: number;
-        lat: number;
-    };
-}
+import { City } from "../utils/types";
+
 
 const searchContainer = document.querySelector(".input") as HTMLDivElement;
 

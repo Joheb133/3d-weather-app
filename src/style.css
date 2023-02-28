@@ -3,8 +3,10 @@ body {
     padding: 0;
 }
 
-canvas {
-    display: block;
+.three-container {
+    width: 100%;
+    height: 100vh;
+    height: 100svh;
 }
 
 #location-input {

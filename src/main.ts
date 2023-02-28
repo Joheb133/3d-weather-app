@@ -1,75 +1,64 @@
-import scene from './3d/scene';
-import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader';
-import * as THREE from 'three';
-import rotateAroundSphere from './3d/utils/earthRotation';
+import World from './3d/World';
 import search from './api/search';
-import {createUl} from './utils/searchList';
+import {createUl} from './components/searchList';
 
 
-//load scene
-const myScene = new scene();
+const threeContainer = document.querySelector('.three-container') as HTMLDivElement;
 
-//load earth
-const gltfLoader = new GLTFLoader();
-gltfLoader.load( 'models/earth-low-poly_hq/earth2.glb', function ( gltf ) {
-    const model = gltf.scene;
-
-    model.scale.set(6, 6, 6)
-	myScene.add(model)
-}, undefined, function ( error ) {
-	console.error( error );
-});
+//load threejs scene
+const threeApp = new World(threeContainer)
+await threeApp.init()
 
 //add weather models to scene
-interface Obj3ds {
-    group: THREE.Group,
-    obj: {[key: string]: THREE.Object3D}
-}
+// interface Obj3ds {
+//     group: THREE.Group,
+//     obj: {[key: string]: THREE.Object3D}
+// }
 
-let obj3ds: Obj3ds = {
-    group: new THREE.Group(),
-    obj: {}
-}
+// let obj3ds: Obj3ds = {
+//     group: new THREE.Group(),
+//     obj: {}
+// }
 
-const dictionary: { [key: string]: any } = {
-    'sun': '01',
-    'sun_cloud': '02',
-    'cloud': '03',
-    'clouds': '04',
-    'rain_cloud': '09',
-    'rain_sun': '10',
-    'thunder': '11',
-    'snow': '13',
-    'mist': '50'
-}
+// const dictionary: { [key: string]: any } = {
+//     'sun': '01',
+//     'sun_cloud': '02',
+//     'cloud': '03',
+//     'clouds': '04',
+//     'rain_cloud': '09',
+//     'rain_sun': '10',
+//     'thunder': '11',
+//     'snow': '13',
+//     'mist': '50'
+// }
 
-const objectLoader = new THREE.ObjectLoader()
-objectLoader.load('data/model.json', function (obj) {
-    const children = obj.children
+// const objectLoader = new THREE.ObjectLoader()
+// objectLoader.load('data/model.json', function (obj) {
+//     const children = obj.children
     
-    children.forEach(element => {
-        element.scale.set(0.15, 0.15, 0.15)
-        element.position.set(0, 0, 0)
-        //obj key = (dictionary value = element name) : value = element
-        obj3ds.obj[dictionary[element.name]] = element
-    })
-    obj3ds.group.children = children
-    obj3ds.group.name = 'weather';
-    //myScene.add(obj3ds.group);
-})
+//     children.forEach(element => {
+//         element.scale.set(0.15, 0.15, 0.15)
+//         element.position.set(0, 0, 0)
+//         //obj key = (dictionary value = element name) : value = element
+//         obj3ds.obj[dictionary[element.name]] = element
+//     })
+//     obj3ds.group.children = children
+//     obj3ds.group.name = 'weather';
+//     //myScene.add(obj3ds.group);
+// })
 
-function moveIcon(no: string, lat: number, lon: number) {
-    //reset asset positions
-    for(const key in obj3ds.obj) {
-        obj3ds.obj[key].position.set(0, 0, 0);
-    }
+// function moveIcon(no: string, lat: number, lon: number) {
+//     //reset asset positions
+//     for(const key in obj3ds.obj) {
+//         obj3ds.obj[key].position.set(0, 0, 0);
+//     }
 
-    //format res icon string
-    no = no.replace(no.charAt(2), '')
+//     //format res icon string
+//     no = no.replace(no.charAt(2), '')
 
-    rotateAroundSphere(obj3ds.obj[no], lat, lon, 0.5, false)
+//     rotateAroundSphere(obj3ds.obj[no], lat, lon, 0.5, false)
     
-}
+// }
 
 
 // handle searching weather
@@ -111,14 +100,12 @@ submitBtn.addEventListener('click', async function() {
             locInput.value = '';
             temp.value = value.main.temp
             addTempEl();
-            moveIcon(value.weather[0].icon, value.coord.lat, value.coord.lon)
-            rotateAroundSphere(myScene.camera, value.coord.lat, value.coord.lon, 3)
-            
+            //moveIcon(value.weather[0].icon, value.coord.lat, value.coord.lon);
+            threeApp.camAroundSphere(value.coord.lat, value.coord.lon, 3);
         }).catch((error)=>{
             console.log(error)
         });
     }
-
     searching = false
 });
 
