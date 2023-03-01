@@ -14,27 +14,6 @@ const threeApp = new World(threeContainer)
 await threeApp.init()
 
 //add weather models to scene
-// interface Obj3ds {
-//     group: THREE.Group,
-//     obj: {[key: string]: THREE.Object3D}
-// }
-
-// let obj3ds: Obj3ds = {
-//     group: new THREE.Group(),
-//     obj: {}
-// }
-
-// const dictionary: { [key: string]: any } = {
-//     'sun': '01',
-//     'sun_cloud': '02',
-//     'cloud': '03',
-//     'clouds': '04',
-//     'rain_cloud': '09',
-//     'rain_sun': '10',
-//     'thunder': '11',
-//     'snow': '13',
-//     'mist': '50'
-// }
 
 // const objectLoader = new THREE.ObjectLoader()
 // objectLoader.load('data/model.json', function (obj) {
@@ -117,6 +96,6 @@ function createUlSuccess(value: any){
     locInput.value = '';
     temp.value = value.main.temp
     addTempEl(temp);
-    //moveIcon(value.weather[0].icon, value.coord.lat, value.coord.lon);
-    threeApp.camAroundSphere(value.coord.lat, value.coord.lon, 3);
+    threeApp.weatherAroundSphere(value.weather[0].icon, value.coord.lat, value.coord.lon);
+    threeApp.camAroundSphere(value.coord.lat, value.coord.lon);
 }

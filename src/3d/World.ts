@@ -9,10 +9,12 @@ import { Resizer } from './systems/Resizer';
 import assets from './components/assets';
 import rotateAroundSphere from './utils/sphericalRotate';
 import { setEarth } from './components/earth';
+import { moveWeatherAsset, setWeather } from './components/weather';
 
 //create threejs scene
 export default class World {
     private camera: THREE.PerspectiveCamera = createCamera()
+    private weather: any
     constructor(private container: HTMLDivElement) {}
 
     async init(){
@@ -31,7 +33,8 @@ export default class World {
 
         /* Add models */
         const earth = setEarth(items.earth_model)
-        scene.add(earth)
+        this.weather = setWeather(items.weather_models)
+        scene.add(earth, this.weather)
 
         /* lighting */
         scene.add(new AmbientLight(0xffffff, 0.5));
@@ -48,7 +51,11 @@ export default class World {
         animate()
     };
 
-    camAroundSphere(lat: number, lon: number, radius: number){
-        rotateAroundSphere(this.camera, lat, lon, radius);
+    camAroundSphere(lat: number, lon: number){
+        rotateAroundSphere(this.camera, lat, lon, 3);
     };
+
+    weatherAroundSphere(name: string, lat: number, lon: number){
+        moveWeatherAsset(this.weather, name, lat, lon)
+    }
 };
