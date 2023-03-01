@@ -1,6 +1,8 @@
 import World from './3d/World';
 import search from './api/search';
-import {createUl} from './components/searchList';
+
+import { createUl } from './components/searchList';
+import { addTempEl, swapUnit } from './components/tempElement';
 
 
 const threeContainer = document.querySelector('.three-container') as HTMLDivElement;
@@ -35,7 +37,7 @@ await threeApp.init()
 // const objectLoader = new THREE.ObjectLoader()
 // objectLoader.load('data/model.json', function (obj) {
 //     const children = obj.children
-    
+
 //     children.forEach(element => {
 //         element.scale.set(0.15, 0.15, 0.15)
 //         element.position.set(0, 0, 0)
@@ -57,52 +59,57 @@ await threeApp.init()
 //     no = no.replace(no.charAt(2), '')
 
 //     rotateAroundSphere(obj3ds.obj[no], lat, lon, 0.5, false)
-    
+
 // }
 
 
 // handle searching weather
 const locInput = document.getElementById('location-input') as HTMLInputElement;
 const submitBtn = document.getElementById('submit-button') as HTMLButtonElement;
-const tempEl = document.querySelector('#temp-el') as HTMLSpanElement;
 let searching = false;
 
-submitBtn.addEventListener('click', async function() {
-    if(searching) return
+let temp = {
+    c: true,
+    f: false,
+    value: '' as any
+}
+
+submitBtn.addEventListener('click', async function () {
+    if (searching) return
     searching = true
 
     let input = locInput.value;
     let country = '';
     //if ul res already exists
-    if(document.querySelector('.response')) {
+    if (document.querySelector('.response')) {
         document.querySelector('.response')?.remove();
     }
 
     //if user specify country
-    if(locInput.value.includes(',')) {
-        country = input.slice(input.indexOf(',')+1, input.length)
+    if (locInput.value.includes(',')) {
+        country = input.slice(input.indexOf(',') + 1, input.length)
         country = country.trimStart()
         input = input.slice(0, input.indexOf(','))
     }
 
     const city = await search(input);
 
-    if(city.error === 'city not found') {
+    if (city.error === 'city not found') {
         locInput.placeholder = city.error
         locInput.value = '';
-    } else if(city.error) {
+    } else if (city.error) {
         console.error(city)
         locInput.placeholder = 'Server error'
         locInput.value = '';
     } else {
         locInput.placeholder = 'City';
-        createUl(city, country).then((value)=>{
+        createUl(city, country).then((value) => {
             locInput.value = '';
             temp.value = value.main.temp
-            addTempEl();
+            addTempEl(temp);
             //moveIcon(value.weather[0].icon, value.coord.lat, value.coord.lon);
             threeApp.camAroundSphere(value.coord.lat, value.coord.lon, 3);
-        }).catch((error)=>{
+        }).catch((error) => {
             console.log(error)
         });
     }
@@ -111,38 +118,7 @@ submitBtn.addEventListener('click', async function() {
 
 //temperature conversion
 const tempBtn = document.querySelector('#temp-toggle-btn') as HTMLButtonElement;
-let temp = {
-    c: true,
-    f: false,
-    value: '' as any
-}
 
-tempBtn.addEventListener("click", ()=>{
-    if(temp.value == '') return 
-    if(temp.c) {
-        temp.c = false;
-        temp.f = true;
-    } else if(temp.f) {
-        temp.c = true;
-        temp.f = false;
-    };
-    addTempEl();
+tempBtn.addEventListener("click", () => {
+    swapUnit(temp)
 })
-
-function addTempEl() {
-    if(temp.c) {
-        tempEl.innerText = `${kelvinToC(temp.value).toFixed(1)}°`
-        tempBtn.innerText = 'F°'
-    } else if(temp.f) {
-        tempEl.innerText = `${kelvinToF(temp.value).toFixed(1)}°`
-        tempBtn.innerText = 'C°'
-    }
-}
-
-function kelvinToC(kelvin: number) {
-    return kelvin - 273.15
-}
-
-function kelvinToF(kelvin: number) {
-    return (kelvin - 273.15) * 1.8 + 32
-}
