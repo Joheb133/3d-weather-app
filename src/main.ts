@@ -1,9 +1,11 @@
 import World from './3d/World';
+
 import search from './api/search';
 
 import { createUl } from './components/searchList';
 import { addTempEl, swapUnit } from './components/tempElement';
 
+import { inputFail } from './utils/inputFail';
 
 const threeContainer = document.querySelector('.three-container') as HTMLDivElement;
 
@@ -80,10 +82,9 @@ submitBtn.addEventListener('click', async function () {
 
     let input = locInput.value;
     let country = '';
+
     //if ul res already exists
-    if (document.querySelector('.response')) {
-        document.querySelector('.response')?.remove();
-    }
+    if (document.querySelector('.response')) document.querySelector('.response')?.remove();
 
     //if user specify country
     if (locInput.value.includes(',')) {
@@ -94,31 +95,28 @@ submitBtn.addEventListener('click', async function () {
 
     const city = await search(input);
 
-    if (city.error === 'city not found') {
-        locInput.placeholder = city.error
-        locInput.value = '';
-    } else if (city.error) {
-        console.error(city)
-        locInput.placeholder = 'Server error'
-        locInput.value = '';
+    if (city.error){
+        inputFail(city)
     } else {
         locInput.placeholder = 'City';
-        createUl(city, country).then((value) => {
-            locInput.value = '';
-            temp.value = value.main.temp
-            addTempEl(temp);
-            //moveIcon(value.weather[0].icon, value.coord.lat, value.coord.lon);
-            threeApp.camAroundSphere(value.coord.lat, value.coord.lon, 3);
-        }).catch((error) => {
-            console.log(error)
-        });
+        createUl(city, country)
+        .then((value) => {createUlSuccess(value)})
+        .catch((error) => {console.log(error)});
     }
     searching = false
 });
 
-//temperature conversion
+//temp button listener
 const tempBtn = document.querySelector('#temp-toggle-btn') as HTMLButtonElement;
-
 tempBtn.addEventListener("click", () => {
     swapUnit(temp)
 })
+
+//createUl success function
+function createUlSuccess(value: any){
+    locInput.value = '';
+    temp.value = value.main.temp
+    addTempEl(temp);
+    //moveIcon(value.weather[0].icon, value.coord.lat, value.coord.lon);
+    threeApp.camAroundSphere(value.coord.lat, value.coord.lon, 3);
+}
