@@ -27,7 +27,12 @@ export class AssetLoader{
             for (const asset of this.assets){
                 if(asset.type === 'glb' || asset.type === 'gltf'){
                     this.loaders.gltf.load(asset.path, (file: Obj)=>{ 
-                        //pass resolve as loadedAsset callback  
+                        //if asset has animation add it to object3d
+                        if(file.animations.length !== 0){
+                            file.scene.animations = file.animations
+                        }
+
+                        //pass resolve as loadedAsset callback
                         this.loadedAsset(asset, file.scene, res)
                     })
                 } else if(asset.type === 'hdr') {
