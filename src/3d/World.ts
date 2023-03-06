@@ -66,6 +66,6 @@ export default class World {
 
     weatherAroundSphere(name: string, lat: number, lon: number){
         moveWeatherAsset(this.weather, name, lat, lon)
-        weatherAnimation(name, this.items.weather_models.animations, this.mixer, this.weather)
+        weatherAnimation(name, this.items.weather_models.animations, this.mixer)
     };
 };
