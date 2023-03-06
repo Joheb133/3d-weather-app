@@ -31,7 +31,7 @@ export function moveWeatherAsset(group: THREE.Group, name: string, lat: number, 
     rotateAroundSphere(group, lat, lon, 0.1, false)
 }
 
-export function weatherAnimation(name: String, animations: [], mixer: THREE.AnimationMixer){
+export function weatherAnimation(name: string, animations: [], mixer: THREE.AnimationMixer, weather: THREE.Group){
     //play / stop animations
     animations.forEach((element: any) => {
         if(element.name == name){

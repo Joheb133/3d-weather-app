@@ -23,6 +23,7 @@ export default class World {
         /* load assets */
         const assetLoader = new AssetLoader(assets);
         this.items = await assetLoader.startLoading() as {[key: string]: any};
+        console.log(this.items.weather_models)
 
         /* Setup scene */
         const scene = createScene(this.items.sunset_env);
@@ -36,6 +37,7 @@ export default class World {
         const earth = setEarth(this.items.earth_model.scene)
         this.weather = setWeather(this.items.weather_models.scene)
         scene.add(earth, this.weather)
+        
 
         /* lighting */
         scene.add(new AmbientLight(0xffffff, 0.5));
@@ -64,6 +66,6 @@ export default class World {
 
     weatherAroundSphere(name: string, lat: number, lon: number){
         moveWeatherAsset(this.weather, name, lat, lon)
-        weatherAnimation(name, this.weather.animations, this.mixer)
-    }
+        weatherAnimation(name, this.items.weather_models.animations, this.mixer, this.weather)
+    };
 };
