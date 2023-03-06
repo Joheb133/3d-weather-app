@@ -1,7 +1,7 @@
 import rotateAroundSphere from "../utils/sphericalRotate";
 
 export function setWeather(mesh: THREE.Object3D) {
-    mesh.scale.set(1, 1, 1) //.25
+    mesh.scale.set(2, 2, 2) //.25
     mesh.children.forEach(element => {
         element.position.set(0, 0, 0)
     })
@@ -12,10 +12,17 @@ export function setWeather(mesh: THREE.Object3D) {
 export function moveWeatherAsset(group: THREE.Group, name: string, lat: number, lon: number) {
     //set all assets to invisible
     group.children.forEach(element => {
+        let id = name;
+
         element.visible = false
 
+        //if mesh name doesnt have n or d
+        if(element.name.length == 2){
+            id = id.slice(0, 2)
+        }
+
         //set right object to visible
-        if (element.name === name) {
+        if (element.name === id) {
             element.visible = true;
         }
     })
