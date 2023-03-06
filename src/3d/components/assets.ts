@@ -14,10 +14,5 @@ export default [
         name: 'weather_models',
         type: 'glb',
         path: '/models/weather.glb'
-    },
-    {
-        name: 'rain_model',
-        type: 'glb',
-        path: '/models/rain.glb'
     }
 ]

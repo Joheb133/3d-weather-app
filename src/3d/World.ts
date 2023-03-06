@@ -1,4 +1,4 @@
-import { AmbientLight, Clock } from 'three';
+import { AmbientLight, AnimationMixer, Clock, Event, Object3D } from 'three';
 
 import { createCamera } from './components/camera';
 import { createScene } from './components/scene';
@@ -9,21 +9,23 @@ import { Resizer } from './systems/Resizer';
 import assets from './components/assets';
 import rotateAroundSphere from './utils/sphericalRotate';
 import { setEarth } from './components/earth';
-import { moveWeatherAsset, setWeather, weatherAnimationMixer } from './components/weather';
+import { moveWeatherAsset, setWeather, weatherAnimation } from './components/weather';
 
 //create threejs scene
 export default class World {
     private camera: THREE.PerspectiveCamera = createCamera()
+    private mixer: any
+    private items: any // unedited files
     private weather: any
     constructor(private container: HTMLDivElement) {}
 
     async init(){
         /* load assets */
         const assetLoader = new AssetLoader(assets);
-        const items = await assetLoader.startLoading() as {[key: string]: any};
+        this.items = await assetLoader.startLoading() as {[key: string]: any};
 
         /* Setup scene */
-        const scene = createScene(items.sunset_env);
+        const scene = createScene(this.items.sunset_env);
         const renderer = createRenderer();
         const camera = this.camera;
         this.container.append(renderer.domElement);
@@ -31,11 +33,9 @@ export default class World {
         scene.add(this.camera);
 
         /* Add models */
-        const earth = setEarth(items.earth_model)
-        this.weather = setWeather(items.weather_models)
-        const rain = setWeather(items.rain_model)
-        console.log(rain)
-        scene.add(rain)
+        const earth = setEarth(this.items.earth_model.scene)
+        this.weather = setWeather(this.items.weather_models.scene)
+        scene.add(earth, this.weather)
 
         /* lighting */
         scene.add(new AmbientLight(0xffffff, 0.5));
@@ -45,8 +45,9 @@ export default class World {
         resizer.setSize();
 
         /* Configure animation clips */
-        const mixer = weatherAnimationMixer(rain)
         const clock = new Clock()
+        const mixer = new AnimationMixer(scene)
+        this.mixer = mixer
 
         /* animator */
         function animate(){
@@ -63,5 +64,6 @@ export default class World {
 
     weatherAroundSphere(name: string, lat: number, lon: number){
         moveWeatherAsset(this.weather, name, lat, lon)
+        weatherAnimation(name, this.weather.animations, this.mixer)
     }
 };

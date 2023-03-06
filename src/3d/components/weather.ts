@@ -1,21 +1,12 @@
-
-import { AnimationMixer } from "three";
 import rotateAroundSphere from "../utils/sphericalRotate";
 
-export function setWeather(asset: THREE.Object3D) {
-    asset.scale.set(5, 5, 5) //.25
-    return asset
-}
-
-export function weatherAnimationMixer(mesh: THREE.Object3D) {
-    const mixer = new AnimationMixer(mesh);
-    const clips = mesh.animations;
-
-    clips.forEach((clip) => {
-        mixer.clipAction(clip).play()
+export function setWeather(mesh: THREE.Object3D) {
+    mesh.scale.set(1, 1, 1) //.25
+    mesh.children.forEach(element => {
+        element.position.set(0, 0, 0)
     })
 
-    return mixer
+    return mesh
 }
 
 export function moveWeatherAsset(group: THREE.Group, name: string, lat: number, lon: number) {
@@ -26,7 +17,6 @@ export function moveWeatherAsset(group: THREE.Group, name: string, lat: number, 
         //set right object to visible
         if (element.name === name) {
             element.visible = true;
-            console.log(element)
         }
     })
 
@@ -34,6 +24,13 @@ export function moveWeatherAsset(group: THREE.Group, name: string, lat: number, 
     rotateAroundSphere(group, lat, lon, 0.1, false)
 }
 
-//get animation mesh's as a group
-//create a mixer for each mesh?
-//
+export function weatherAnimation(name: String, animations: [], mixer: THREE.AnimationMixer){
+    //play / stop animations
+    animations.forEach((element: any) => {
+        if(element.name == name){
+            mixer.clipAction(element).play()
+        } else {
+            mixer.clipAction(element).stop()
+        }
+    });
+}
