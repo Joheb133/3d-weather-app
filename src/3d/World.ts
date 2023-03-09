@@ -9,7 +9,7 @@ import { Resizer } from './systems/Resizer';
 import assets from './components/assets';
 import rotateAroundSphere from './utils/sphericalRotate';
 import { setEarth } from './components/earth';
-import { moveWeatherAsset, setWeather, weatherAnimation } from './components/weather';
+import { setRightWeather, setWeather, weatherAnimation } from './components/weather';
 import { createComposer } from './systems/postprocessing';
 import { rotateSphere } from './utils/rotateSphere';
 
@@ -26,7 +26,6 @@ export default class World {
         /* load assets */
         const assetLoader = new AssetLoader(assets);
         this.items = await assetLoader.startLoading() as {[key: string]: any};
-        console.log(this.items.weather_models)
 
         /* Setup scene */
         const scene = createScene(this.items.sunset_env);
@@ -68,7 +67,7 @@ export default class World {
     }
 
     weatherAnimation(name: string){
-        //moveWeatherAsset(this.weather, name, lat, lon)
+        setRightWeather(this.weather, name)
         weatherAnimation(name, this.items.weather_models.animations, this.mixer)
     };
 };

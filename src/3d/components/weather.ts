@@ -1,16 +1,20 @@
-import rotateAroundSphere from "../utils/sphericalRotate";
+import gsap from "gsap"
+
 
 export function setWeather(mesh: THREE.Object3D) {
     mesh.scale.set(0.25, 0.25, 0.25) //.25
+    //mesh.scale.set(5, 5, 5)
     mesh.children.forEach(element => {
         element.position.set(0, 0, 0)
-        element.rotation.set(-Math.PI/2, Math.PI/2, 0)
+        element.rotation.set(-Math.PI / 2, Math.PI / 2, 0)
     })
+    mesh.position.set(0, 0, 0)
 
     return mesh
 }
 
-export function moveWeatherAsset(group: THREE.Group, name: string, lat: number, lon: number) {
+export function setRightWeather(group: THREE.Group, name: string) {
+    group.position.set(0, 0, 0)
 
     //set all assets to invisible
     group.children.forEach(element => {
@@ -26,11 +30,13 @@ export function moveWeatherAsset(group: THREE.Group, name: string, lat: number, 
         //set right object to visible
         if (element.name === id) {
             element.visible = true;
+            gsap.to(group.position, {
+                z: -6.5,
+                duration: 2,
+                ease: 'power2'
+            })
         }
     })
-
-    //rotate group around sphere
-    rotateAroundSphere(group, lat, lon, 0.2)
 }
 
 export function weatherAnimation(name: string, animations: [], mixer: THREE.AnimationMixer) {
