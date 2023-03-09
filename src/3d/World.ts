@@ -1,4 +1,4 @@
-import { AmbientLight, AnimationMixer, Clock, Event, Object3D } from 'three';
+import { AmbientLight, AnimationMixer, Clock} from 'three';
 
 import { createCamera } from './components/camera';
 import { createScene } from './components/scene';
@@ -18,7 +18,7 @@ export default class World {
     private mixer: any
     private items: any // unedited files
     private weather: any
-    constructor(private container: HTMLDivElement) {}
+    constructor() {}
 
     async init(){
         /* load assets */
@@ -56,7 +56,6 @@ export default class World {
         function animate(){
             mixer.update(clock.getDelta())
             requestAnimationFrame(animate)
-            //renderer.render(scene, camera)
             composer.render()
         }
         animate()

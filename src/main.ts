@@ -7,10 +7,8 @@ import { addTempEl, swapUnit } from './components/tempElement';
 
 import { inputFail } from './utils/inputFail';
 
-const threeContainer = document.querySelector('.three-container') as HTMLDivElement;
-
 //load threejs scene
-const threeApp = new World(threeContainer)
+const threeApp = new World()
 await threeApp.init()
 
 //add weather models to scene
