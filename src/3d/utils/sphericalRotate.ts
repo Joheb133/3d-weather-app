@@ -2,7 +2,7 @@ import { gsap } from 'gsap';
 import { Object3D } from 'three';
 
 // Define a function to update the camera's position
-export default function rotateAroundSphere(object: Object3D, lat: number, lon: number, radius: number, animate: boolean = true) {
+export default function rotateAroundSphere(object: Object3D, lat: number, lon: number, radius: number, animate: boolean = false) {
     const radians = Math.PI / 180;
     const offset = 6;
     // Convert the longitude and latitude values to radians

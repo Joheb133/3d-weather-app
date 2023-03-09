@@ -62,7 +62,7 @@ export default class World {
     };
 
     camAroundSphere(lat: number, lon: number){
-        rotateAroundSphere(this.camera, lat, lon, 3);
+        rotateAroundSphere(this.camera, lat, lon, 3, true);
     };
 
     weatherAroundSphere(name: string, lat: number, lon: number){
