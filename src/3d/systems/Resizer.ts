@@ -1,34 +1,33 @@
+import {EffectComposer} from 'postprocessing'
 
 export class Resizer {
-    private width: number
-    private height: number
     constructor(
-        private container: HTMLDivElement,
         private camera: THREE.PerspectiveCamera,
-        private renderer: THREE.WebGLRenderer) {
+        private renderer: THREE.WebGLRenderer, 
+        private composer: EffectComposer) {
 
-        this.width = this.container.clientWidth;
-        this.height = this.container.clientHeight;
+        this.setSize()
 
         //listen for container resize
         window.addEventListener('resize', () => {
-            this.width = this.container.clientWidth;
-            this.height = this.container.clientHeight;
             this.setSize();
         })
     }
 
     setSize() {
         //set camera aspect ratio
-        this.camera.aspect = this.width / this.height
+        this.camera.aspect = innerWidth / innerHeight
 
         //call project matrix to update camera
         this.camera.updateProjectionMatrix()
 
         //update renderer size
-        this.renderer.setSize(this.width, this.height);
+        this.renderer.setSize(innerWidth, innerHeight);
 
         //set p ratio for mobile, set max to 2
         this.renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2))
+
+        //composer size
+        this.composer.setSize(innerWidth, innerHeight)
     }
 }

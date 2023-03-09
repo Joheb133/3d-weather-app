@@ -10,6 +10,7 @@ import assets from './components/assets';
 import rotateAroundSphere from './utils/sphericalRotate';
 import { setEarth } from './components/earth';
 import { moveWeatherAsset, setWeather, weatherAnimation } from './components/weather';
+import { createComposer } from './systems/postprocessing';
 
 //create threejs scene
 export default class World {
@@ -29,7 +30,7 @@ export default class World {
         const scene = createScene(this.items.sunset_env);
         const renderer = createRenderer();
         const camera = this.camera;
-        this.container.append(renderer.domElement);
+        const composer = createComposer(renderer, scene, camera)
 
         scene.add(this.camera);
 
@@ -43,7 +44,7 @@ export default class World {
         scene.add(new AmbientLight(0xffffff, 0.5));
         
         /* set sizes */
-        const resizer = new Resizer(this.container, camera, renderer);
+        const resizer = new Resizer(camera, renderer, composer);
         resizer.setSize();
 
         /* Configure animation clips */
@@ -55,7 +56,8 @@ export default class World {
         function animate(){
             mixer.update(clock.getDelta())
             requestAnimationFrame(animate)
-            renderer.render(scene, camera)
+            //renderer.render(scene, camera)
+            composer.render()
         }
         animate()
     };

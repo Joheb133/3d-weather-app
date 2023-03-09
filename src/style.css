@@ -3,12 +3,6 @@ body {
     padding: 0;
 }
 
-.three-container {
-    width: 100%;
-    height: 100vh;
-    height: 100svh;
-}
-
 #location-input {
     width: 240px;
     height: 20px;
