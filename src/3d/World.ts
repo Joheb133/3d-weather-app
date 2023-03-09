@@ -11,6 +11,7 @@ import rotateAroundSphere from './utils/sphericalRotate';
 import { setEarth } from './components/earth';
 import { moveWeatherAsset, setWeather, weatherAnimation } from './components/weather';
 import { createComposer } from './systems/postprocessing';
+import { rotateSphere } from './utils/rotateSphere';
 
 //create threejs scene
 export default class World {
@@ -18,6 +19,7 @@ export default class World {
     private mixer: any
     private items: any // unedited files
     private weather: any
+    private earth: any
     constructor() {}
 
     async init(){
@@ -35,9 +37,9 @@ export default class World {
         scene.add(this.camera);
 
         /* Add models */
-        const earth = setEarth(this.items.earth_model.scene)
+        this.earth = setEarth(this.items.earth_model.scene)
         this.weather = setWeather(this.items.weather_models.scene)
-        scene.add(earth, this.weather)
+        scene.add(this.earth, this.weather)
         
 
         /* lighting */
@@ -61,12 +63,12 @@ export default class World {
         animate()
     };
 
-    camAroundSphere(lat: number, lon: number){
-        rotateAroundSphere(this.camera, lat, lon, 3, true);
-    };
+    rotateEarth(lat: number, lon: number){
+        rotateSphere(this.earth, lat, lon)
+    }
 
-    weatherAroundSphere(name: string, lat: number, lon: number){
-        moveWeatherAsset(this.weather, name, lat, lon)
+    weatherAnimation(name: string){
+        //moveWeatherAsset(this.weather, name, lat, lon)
         weatherAnimation(name, this.items.weather_models.animations, this.mixer)
     };
 };

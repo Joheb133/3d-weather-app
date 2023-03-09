@@ -94,6 +94,6 @@ function createUlSuccess(value: any){
     locInput.value = '';
     temp.value = value.main.temp
     addTempEl(temp);
-    threeApp.weatherAroundSphere(value.weather[0].icon, value.coord.lat, value.coord.lon);
-    threeApp.camAroundSphere(value.coord.lat, value.coord.lon);
+    threeApp.weatherAnimation(value.weather[0].icon);
+    threeApp.rotateEarth(value.coord.lat, value.coord.lon);
 }
