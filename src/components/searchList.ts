@@ -1,6 +1,6 @@
 import getWeather from "../api/weather";
 
-import { City } from "../utils/types";
+import { City } from "../ts/types";
 
 
 const searchContainer = document.querySelector(".input") as HTMLDivElement;

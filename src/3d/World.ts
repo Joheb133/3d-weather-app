@@ -7,7 +7,6 @@ import { createRenderer } from './systems/renderer';
 import { Resizer } from './systems/Resizer';
 
 import assets from './components/assets';
-import rotateAroundSphere from './utils/sphericalRotate';
 import { setEarth } from './components/earth';
 import { setRightWeather, setWeather, weatherAnimation } from './components/weather';
 import { createComposer } from './systems/postprocessing';

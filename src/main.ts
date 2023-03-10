@@ -9,38 +9,7 @@ import { inputFail } from './utils/inputFail';
 
 //load threejs scene
 const threeApp = new World()
-await threeApp.init()
-
-//add weather models to scene
-
-// const objectLoader = new THREE.ObjectLoader()
-// objectLoader.load('data/model.json', function (obj) {
-//     const children = obj.children
-
-//     children.forEach(element => {
-//         element.scale.set(0.15, 0.15, 0.15)
-//         element.position.set(0, 0, 0)
-//         //obj key = (dictionary value = element name) : value = element
-//         obj3ds.obj[dictionary[element.name]] = element
-//     })
-//     obj3ds.group.children = children
-//     obj3ds.group.name = 'weather';
-//     //myScene.add(obj3ds.group);
-// })
-
-// function moveIcon(no: string, lat: number, lon: number) {
-//     //reset asset positions
-//     for(const key in obj3ds.obj) {
-//         obj3ds.obj[key].position.set(0, 0, 0);
-//     }
-
-//     //format res icon string
-//     no = no.replace(no.charAt(2), '')
-
-//     rotateAroundSphere(obj3ds.obj[no], lat, lon, 0.5, false)
-
-// }
-
+threeApp.init()
 
 // handle searching weather
 const locInput = document.getElementById('location-input') as HTMLInputElement;

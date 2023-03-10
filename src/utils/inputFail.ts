@@ -1,4 +1,4 @@
-import { Obj } from "./types";
+import { Obj } from "../ts/types";
 
 const locInput = document.getElementById('location-input') as HTMLInputElement;
 

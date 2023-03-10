@@ -2,7 +2,7 @@ import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader";
 import { RGBELoader } from "three/examples/jsm/loaders/RGBELoader";
 import { EquirectangularReflectionMapping } from "three";
 
-import { Obj } from "../../utils/types";
+import { Obj } from "../../ts/types";
 
 export class AssetLoader{
     private loaders: Obj = {}

@@ -1,4 +1,4 @@
-import { Obj } from "../utils/types"
+import { Obj } from "../ts/types"
 
 //handle temperature html element
 const tempEl = document.querySelector('#temp-el') as HTMLSpanElement;
