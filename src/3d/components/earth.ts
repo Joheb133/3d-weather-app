@@ -9,7 +9,7 @@ export function setEarth(asset: THREE.Object3D) {
 
     //atmosphere
     const atmosphere = new Mesh(
-        new SphereGeometry(6, 50, 50),
+        new SphereGeometry(1.5, 50, 50),
         new ShaderMaterial({
             uniforms: {
                 u_Color: {value: new Color(0x2879eb)}
@@ -17,12 +17,15 @@ export function setEarth(asset: THREE.Object3D) {
             vertexShader: SphereGlowVertex,
             fragmentShader: SphereGlowFragment,
             blending: AdditiveBlending,
-            side: BackSide
+            side: BackSide,
         })
     )
+    atmosphere.position.set(asset.position.x, asset.position.y, asset.position.z);
 
     atmosphere.name = 'atmosphere'
     asset.add(atmosphere)
+
+    console.log(asset)
 
     return asset
 }
