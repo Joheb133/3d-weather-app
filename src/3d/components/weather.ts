@@ -2,7 +2,7 @@ import gsap from "gsap"
 
 
 export function setWeather(mesh: THREE.Object3D) {
-    mesh.scale.set(0.25, 0.25, 0.25) //.25
+    mesh.scale.set(0.5, 0.5, 0.5) //.25
     //mesh.scale.set(5, 5, 5)
     mesh.children.forEach(element => {
         element.position.set(0, 0, 0)
