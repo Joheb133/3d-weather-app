@@ -8,23 +8,23 @@ export function setEarth(asset: THREE.Object3D) {
     asset.position.set(0, 0, 0)
 
     //atmosphere
-    const atmosphere = new Mesh(
-        new SphereGeometry(1, 50, 50),
-        new ShaderMaterial({
-            uniforms: {
-                u_Color: {value: new Color(0x2879eb)}
-            },
-            vertexShader: SphereGlowVertex,
-            fragmentShader: SphereGlowFragment,
-            blending: AdditiveBlending,
-            side: BackSide,
-        })
-    )
-    atmosphere.position.set(asset.position.x, asset.position.y, asset.position.z);
-    atmosphere.scale.set(1.1, 1.1, 1.1)
+    // const atmosphere = new Mesh(
+    //     new SphereGeometry(1, 50, 50),
+    //     new ShaderMaterial({
+    //         uniforms: {
+    //             u_Color: {value: new Color(0x03a5fc)}
+    //         },
+    //         vertexShader: SphereGlowVertex,
+    //         fragmentShader: SphereGlowFragment,
+    //         blending: AdditiveBlending,
+    //         side: BackSide,
+    //     })
+    // )
+    // atmosphere.position.set(asset.position.x, asset.position.y, asset.position.z);
+    // atmosphere.scale.set(1.1, 1.1, 1.1)
 
-    atmosphere.name = 'atmosphere'
-    asset.add(atmosphere)
+    // atmosphere.name = 'atmosphere'
+    // asset.add(atmosphere)
 
     return asset
 }
