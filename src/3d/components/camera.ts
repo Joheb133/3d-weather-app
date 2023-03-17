@@ -2,7 +2,7 @@ import { PerspectiveCamera } from "three";
 
 export function createCamera() {
     const camera = new PerspectiveCamera(50, 1, 0.1, 1000);
-    camera.position.set(4, 0, -20) //-4,0,-8
+    camera.position.set(0, 0, -20) //4,0,-20
     //camera.rotation.set(Math.PI, 0, -Math.PI/1.15)
     camera.lookAt(0, 0, 0)
 
@@ -39,6 +39,7 @@ function debugCamera(camera: THREE.PerspectiveCamera) {
     })
 
     //cam controls
+    //positions and rotations will need to be configured depending on scenes
     window.addEventListener('keydown', (event) => {
         if (!debug) return
 

@@ -1,15 +1,16 @@
 import { AmbientLight, AnimationMixer, Clock} from 'three';
 
+import assets from './components/assets';
 import { createCamera } from './components/camera';
 import { createScene } from './components/scene';
+import { setEarth } from './components/earth';
+import { setRightWeather, setWeather, weatherAnimation } from './components/weather';
+
 import { AssetLoader } from './systems/AssetLoader';
 import { createRenderer } from './systems/renderer';
 import { Resizer } from './systems/Resizer';
-
-import assets from './components/assets';
-import { setEarth } from './components/earth';
-import { setRightWeather, setWeather, weatherAnimation } from './components/weather';
 import { createComposer } from './systems/postprocessing';
+
 import { rotateSphere } from './utils/rotateSphere';
 
 //create threejs scene

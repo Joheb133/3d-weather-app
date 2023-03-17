@@ -10,15 +10,19 @@
 </head>
 
 <body>
-  <canvas id="three-canvas-el"></canvas>
-  <div style="position: absolute; top: 0; left: 0; z-index: 5;" class="input">
-    <div class="search-bar-wrap">
-      <input type="text" id="location-input" placeholder="City">
-      <button id="submit-button">Submit</button>
+  <div class="gui">
+    <div style="position: absolute; top: 0; left: 0; z-index: 5;" class="input">
+      <div class="search-bar-wrap">
+        <input type="text" id="location-input" placeholder="City">
+        <button id="submit-button">Submit</button>
+      </div>
     </div>
+    <div class="temp-wrap"><span id="temp-el"></span></div>
+    <button id="temp-toggle-btn">F°</button>
   </div>
-  <div class="temp-wrap"><span id="temp-el"></span></div>
-  <button id="temp-toggle-btn">F°</button>
+  <div class="canvas-container">
+    <canvas id="three-canvas-el"></canvas>
+  </div>
 </body>
 
 </html>
