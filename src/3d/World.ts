@@ -12,6 +12,7 @@ import { Resizer } from './systems/Resizer';
 import { createComposer } from './systems/postprocessing';
 
 import { rotateSphere } from './utils/rotateSphere';
+import { createLight } from './components/lighting';
 
 //create threejs scene
 export default class World {
@@ -28,7 +29,7 @@ export default class World {
         this.items = await assetLoader.startLoading() as {[key: string]: any};
 
         /* Setup scene */
-        const scene = createScene(this.items.sunset_env);
+        const scene = createScene();
         const renderer = createRenderer();
         const camera = this.camera;
         const composer = createComposer(renderer, scene, camera)
@@ -42,7 +43,8 @@ export default class World {
         
 
         /* lighting */
-        scene.add(new AmbientLight(0xffffff, 0.5));
+        scene.add(new AmbientLight(0xffffff, 0.8));
+        scene.add(createLight());
         
         /* set sizes */
         const resizer = new Resizer(camera, renderer, composer);

@@ -1,4 +1,4 @@
-import { WebGLRenderer } from 'three'
+import { PCFSoftShadowMap, WebGLRenderer } from 'three'
 
 
 
@@ -14,5 +14,8 @@ export function createRenderer() {
     // renderer.outputEncoding = THREE.sRGBEncoding;
     // renderer.toneMapping = THREE.LinearToneMapping;
     // renderer.toneMappingExposure = 2
+
+    renderer.shadowMap.enabled = true;
+    renderer.shadowMap.type = PCFSoftShadowMap;
     return renderer
 }
