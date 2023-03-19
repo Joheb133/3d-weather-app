@@ -3,7 +3,7 @@ import getWeather from "../api/weather";
 import { City } from "../ts/types";
 
 
-const searchContainer = document.querySelector(".input") as HTMLDivElement;
+const searchContainer = document.querySelector(".location-wrap") as HTMLDivElement;
 
 export function createUl(city: Array<City>, countryParam?: string): Promise<any> {
     return new Promise((resolve, reject) => {
@@ -29,8 +29,11 @@ export function createUl(city: Array<City>, countryParam?: string): Promise<any>
         }
 
         //create location buttons
+        let ulWrap = document.createElement("div");
+        ulWrap.className = 'response-wrap'
         let newUl = document.createElement("ul");
         newUl.className = 'response'
+        ulWrap.appendChild(newUl)
 
         for (let i = 0; i < limit; i++) {
             //create li
@@ -61,6 +64,6 @@ export function createUl(city: Array<City>, countryParam?: string): Promise<any>
         }
 
         //add locations buttons to DOM
-        searchContainer.appendChild(newUl)
+        searchContainer.appendChild(ulWrap)
     });
 }

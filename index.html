@@ -4,25 +4,58 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <script type="module" src="src/main.ts" defer></script>
-  <link rel="stylesheet" href="src/style.css">
+  <script type="module" src="/src/main.ts" defer></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@200;400&family=Unbounded:wght@400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/src/style.css">
   <title></title>
 </head>
 
 <body>
-  <div class="gui">
-    <div style="position: absolute; top: 0; left: 0; z-index: 5;" class="input">
-      <div class="search-bar-wrap">
-        <input type="text" id="location-input" placeholder="City">
-        <button id="submit-button">Submit</button>
+  <div class="top-bar">
+    <div class="logo">
+      <span id="tag">Made by</span>
+      <br>
+      <span id="name">Joheb</span>
+    </div>
+    <div class="time-wrap">
+      <span id="time-el"></span>
+      <br>
+      <div class="update-el">
+        <span>Last updated: </span>
+        <span id="update-time"></span>
       </div>
     </div>
-    <div class="temp-wrap"><span id="temp-el"></span></div>
-    <button id="temp-toggle-btn">F°</button>
+    <div class="search-bar-wrap">
+      <div class="location-wrap">
+        <input type="text" class="location-input" placeholder="City">
+      </div>
+      <button id="submit-btn">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+          <path fill="currentColor"
+            d="m18.9 20.3l-5.6-5.6q-.75.6-1.725.95Q10.6 16 9.5 16q-2.725 0-4.612-1.887Q3 12.225 3 9.5q0-2.725 1.888-4.613Q6.775 3 9.5 3t4.613 1.887Q16 6.775 16 9.5q0 1.1-.35 2.075q-.35.975-.95 1.725l5.625 5.625q.275.275.275.675t-.3.7q-.275.275-.7.275q-.425 0-.7-.275ZM9.5 14q1.875 0 3.188-1.312Q14 11.375 14 9.5q0-1.875-1.312-3.188Q11.375 5 9.5 5Q7.625 5 6.312 6.312Q5 7.625 5 9.5q0 1.875 1.312 3.188Q7.625 14 9.5 14Z" />
+        </svg>
+      </button>
+    </div>
   </div>
-  <div class="canvas-container">
-    <canvas id="three-canvas-el"></canvas>
-  </div>
+
+  <section>
+    <div class="info">
+      <div class="weather-wrap">
+        <span id="location-el"></span>
+        <span id="temp-el"></span>
+        <span id="weather-el"></span>
+      </div>
+      <button id="temp-toggle-btn">
+        <span id="cels-el" class="active-temp">C°</span>/<span id="fahr-el">F°</span>
+      </button>
+    </div>
+    <div class="canvas-container">
+      <canvas id="three-canvas-el"></canvas>
+    </div>
+  </section>
+
 </body>
 
 </html>

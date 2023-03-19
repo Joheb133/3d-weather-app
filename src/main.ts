@@ -12,8 +12,8 @@ const threeApp = new World()
 threeApp.init()
 
 // handle searching weather
-const locInput = document.getElementById('location-input') as HTMLInputElement;
-const submitBtn = document.getElementById('submit-button') as HTMLButtonElement;
+const locInput = document.querySelector('.location-input') as HTMLInputElement;
+const submitBtn = document.querySelector('#submit-btn') as HTMLButtonElement;
 let searching = false;
 
 let temp = {
@@ -30,7 +30,7 @@ submitBtn.addEventListener('click', async function () {
     let country = '';
 
     //if ul res already exists
-    if (document.querySelector('.response')) document.querySelector('.response')?.remove();
+    if (document.querySelector('.response-wrap')) document.querySelector('.response-wrap')?.remove();
 
     //if user specify country
     if (locInput.value.includes(',')) {
@@ -46,7 +46,11 @@ submitBtn.addEventListener('click', async function () {
     } else {
         locInput.placeholder = 'City';
         createUl(city, country)
-        .then((value) => {createUlSuccess(value)})
+        .then((value) => {
+            updateDOM(value)
+            threeApp.weatherAnimation(value.weather[0].icon);
+            threeApp.rotateEarth(value.coord.lat, value.coord.lon);
+        })
         .catch((error) => {console.log(error)});
     }
     searching = false
@@ -58,11 +62,21 @@ tempBtn.addEventListener("click", () => {
     swapUnit(temp)
 })
 
-//createUl success function
-function createUlSuccess(value: any){
+//update HTML elements 
+const locationEl = document.querySelector('#location-el') as HTMLSpanElement;
+const weatherEl = document.querySelector('#weather-el') as HTMLSpanElement;
+function updateDOM(value: any){
+    //update DOM elements
+    //input
     locInput.value = '';
+
+    //temperature
     temp.value = value.main.temp
     addTempEl(temp);
-    threeApp.weatherAnimation(value.weather[0].icon);
-    threeApp.rotateEarth(value.coord.lat, value.coord.lon);
+
+    //location
+    locationEl.innerText = value.name
+
+    //weather
+    weatherEl.innerText = value.weather[0].main
 }

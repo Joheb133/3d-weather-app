@@ -1,6 +1,6 @@
 import { Obj } from "../ts/types";
 
-const locInput = document.getElementById('location-input') as HTMLInputElement;
+const locInput = document.querySelector('.location-input') as HTMLInputElement;
 
 //handle input response error
 export function inputFail(city: Obj){

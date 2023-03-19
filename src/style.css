@@ -2,9 +2,237 @@ body {
     margin: 0;
     padding: 0;
     background-color: #090909;
+    color: white;
+    font-family: 'Montserrat', sans-serif;
 }
 
-.canvas-container{
+/* top */
+
+.top-bar {
+    position: absolute;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.logo {
+    text-align: center;
+    margin: 8px;
+}
+
+#tag {
+    font-weight: 200;
+    font-size: 12px;
+}
+
+#name {
+    font-family: 'Unbounded', cursive;
+    text-transform: uppercase;
+    font-weight: 200;
+    font-size: 1em;
+}
+
+.time-wrap {
+    position: absolute;
+    right: 50%;
+    transform: translate(50%, 0);
+    text-align: center;
+}
+
+#time-el {
+    font-family: 'Unbounded', cursive;
+    font-weight: 700;
+    font-size: 1.5em;
+}
+
+.update-el {
+    opacity: 0;
+    transition: opacity 300ms;
+}
+
+.update-el span {
+    font-weight: 200;
+    opacity: 0.5;
+}
+
+#update-time {
+    opacity: 1;
+}
+
+.search-bar-wrap {
+    display: table;
+    margin: 0 8px;
+}
+
+.search-bar-wrap:hover .location-input {
+    opacity: 1;
+    transition: opacity 400ms;
+}
+
+.search-bar-wrap:hover .response-wrap{
+    opacity: 1;
+    transition: opacity 400ms 200ms;
+}
+
+.location-wrap {
+    position: relative;
+    display: table-cell;
+    vertical-align: middle;
+}
+
+.location-input {
+    width: 240px;
+    height: 20px;
+    border: none;
+    border-radius: 4px 4px 0 0;
+    padding: 4px;
+    margin-bottom: -3px;
+    background-color: #181818;
+    color: rgb(172, 172, 172);
+    outline: none;
+    opacity: 0;
+    transition: opacity 800ms 800ms;
+}
+
+.response-wrap {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    bottom: 0;
+    left: 0;
+    transform: translate(0, 100%);
+    opacity: 0;
+    transition: opacity 600ms 600ms;
+}
+
+.response {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    color: rgb(172, 172, 172);
+}
+
+.response li {
+    width: 242px;
+    height: 20px;
+    padding: 3px;
+}
+
+.response li:hover {
+    opacity: 0.7;
+    cursor: pointer;
+}
+
+.response li:nth-child(2n) {
+    background-color: #181818;
+}
+
+.response li:nth-child(2n+1) {
+    background-color: rgb(15, 15, 15);
+}
+
+.response li:last-child {
+    border-radius: 0 0 4px 4px;
+}
+
+#submit-btn {
+    display: table-cell;
+    vertical-align: middle;
+    background: none;
+    border: none;
+}
+
+#submit-btn:hover svg {
+    opacity: 1;
+    cursor: pointer;
+    transition: opacity 300ms;
+}
+
+#submit-btn svg {
+    width: 26px;
+    height: 26px;
+    color: white;
+    opacity: 0.5;
+    transition: opacity 300ms;
+}
+
+/*-- page --*/
+section {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+/* content */
+
+.info {
+    width: 50%;
+    height: 100svh;
+}
+
+.weather-wrap {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    animation: tempFade 2s ease-in-out 200ms;
+}
+
+#location-el {
+    font-size: 1.25em;
+    font-weight: 200;
+}
+
+#temp-el {
+    padding: 16px;
+    color: white;
+    font-size: 12em;
+    font-family: 'Unbounded', cursive;
+}
+
+#weather-el {
+    font-size: 2em;
+}
+
+@keyframes tempFade {
+    from {
+        opacity: 0
+    }
+
+    to {
+        opacity: 1;
+    }
+}
+
+#temp-toggle-btn {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    margin: 16px;
+    background: none;
+    border: none;
+    color: rgba(255, 255, 255, 0.25);
+    font-family: 'Montserrat', sans-serif;
+    font-size: 1.5em;
+    font-weight: 200;
+}
+
+#temp-toggle-btn:hover {
+    color: rgba(255, 255, 255, 0.5);
+    transition: 100ms;
+    cursor: pointer;
+}
+
+.active-temp {
+    color: rgba(255, 255, 255, 1);
+    ;
+}
+
+/* 3d */
+
+.canvas-container {
     overflow: hidden;
     width: 50%;
     height: 100svh;
@@ -14,61 +242,4 @@ body {
 canvas {
     width: 100%;
     height: 100%;
-}
-
-#location-input {
-    width: 240px;
-    height: 20px;
-}
-
-.input .response {
-    list-style: none;
-    padding: 0;
-    margin: 0;
-}
-
-.input .response li{
-    width: 240px;
-    height: 20px;
-    padding: 3px;
-}
-
-.input .response li:hover {
-    opacity: 0.95;
-    transition: 100ms;
-    cursor: pointer;
-}
-
-.input .response li:nth-child(2n) {
-    background-color: rgb(252, 252, 252);
-}
-
-.input .response li:nth-child(2n+1) {
-    background-color: rgb(248, 248, 248);
-}
-
-.temp-wrap {
-    position: absolute;
-    top: 0;
-    right: 0;
-}
-
-.temp-wrap span {
-    padding: 16px;
-    color: white;
-    font-size: 28px;
-    font-family: monospace;
-    animation: tempFade 1s ease-in-out 100ms;
-}
-
-@keyframes tempFade {
-    from {opacity: 0}
-    to{opacity: 1;}
-}
-
-#temp-toggle-btn {
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    margin: 16px;
 }
