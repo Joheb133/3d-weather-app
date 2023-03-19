@@ -4,6 +4,7 @@ import search from './api/search';
 
 import { createUl } from './components/searchList';
 import { addTempEl, swapUnit } from './components/tempElement';
+import { epochTo24Hour } from './utils/epoch';
 
 import { inputFail } from './utils/inputFail';
 
@@ -65,6 +66,9 @@ tempBtn.addEventListener("click", () => {
 //update HTML elements 
 const locationEl = document.querySelector('#location-el') as HTMLSpanElement;
 const weatherEl = document.querySelector('#weather-el') as HTMLSpanElement;
+const updateTimeEl = document.querySelector('#update-time') as HTMLSpanElement;
+const updateWrap = document.querySelector('.update-wrap') as HTMLDivElement;
+
 function updateDOM(value: any){
     //update DOM elements
     //input
@@ -79,4 +83,8 @@ function updateDOM(value: any){
 
     //weather
     weatherEl.innerText = value.weather[0].main
+
+    //last updated
+    updateTimeEl.innerText = epochTo24Hour(value.dt+value.timezone)
+    if(updateWrap.style.opacity == '') updateWrap.style.opacity = '1';
 }

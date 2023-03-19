@@ -46,12 +46,12 @@ body {
     font-size: 1.5em;
 }
 
-.update-el {
+.update-wrap {
     opacity: 0;
     transition: opacity 300ms;
 }
 
-.update-el span {
+.update-wrap span {
     font-weight: 200;
     opacity: 0.5;
 }
