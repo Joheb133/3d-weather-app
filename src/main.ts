@@ -17,11 +17,8 @@ const locInput = document.querySelector('.location-input') as HTMLInputElement;
 const submitBtn = document.querySelector('#submit-btn') as HTMLButtonElement;
 let searching = false;
 
-let temp = {
-    c: true,
-    f: false,
-    value: '' as any
-}
+//store timers
+let setIntervalRef: Array<any> = [];
 
 submitBtn.addEventListener('click', async function () {
     if (searching) return
@@ -32,6 +29,13 @@ submitBtn.addEventListener('click', async function () {
 
     //if ul res already exists
     if (document.querySelector('.response-wrap')) document.querySelector('.response-wrap')?.remove();
+
+    //clear timers
+    if(setIntervalRef.length > 0){
+        setIntervalRef.forEach(interval =>{
+            clearInterval(interval)
+        })
+    }
 
     //if user specify country
     if (locInput.value.includes(',')) {
@@ -58,6 +62,11 @@ submitBtn.addEventListener('click', async function () {
 });
 
 //temp button listener
+let temp = {
+    c: true,
+    f: false,
+    value: '' as any
+}
 const tempBtn = document.querySelector('#temp-toggle-btn') as HTMLButtonElement;
 tempBtn.addEventListener("click", () => {
     swapUnit(temp)
@@ -66,6 +75,7 @@ tempBtn.addEventListener("click", () => {
 //update HTML elements 
 const locationEl = document.querySelector('#location-el') as HTMLSpanElement;
 const weatherEl = document.querySelector('#weather-el') as HTMLSpanElement;
+const timeEl = document.querySelector('#time-el') as HTMLSpanElement;
 const updateTimeEl = document.querySelector('#update-time') as HTMLSpanElement;
 const updateWrap = document.querySelector('.update-wrap') as HTMLDivElement;
 
@@ -84,7 +94,19 @@ function updateDOM(value: any){
     //weather
     weatherEl.innerText = value.weather[0].main
 
-    //last updated
+    //last updated in local time
     updateTimeEl.innerText = epochTo24Hour(value.dt+value.timezone)
     if(updateWrap.style.opacity == '') updateWrap.style.opacity = '1';
+
+    //current time
+    //set time ms to s
+    const time = new Date().getTime()/1000;
+    timeEl.innerText = epochTo24Hour(time+value.timezone)
+    
+    const tick = setInterval(()=>{
+        const time = new Date().getTime()/1000;
+        if(timeEl.innerText === epochTo24Hour(time+value.timezone)) return
+        timeEl.innerText = epochTo24Hour(time+value.timezone)
+    }, 1000)
+    setIntervalRef.push(tick)
 }
