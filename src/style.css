@@ -85,9 +85,8 @@ body {
     width: 240px;
     height: 20px;
     border: none;
-    border-radius: 4px 4px 0 0;
+    border-radius: 4px;
     padding: 4px;
-    margin-bottom: -3px;
     background-color: #181818;
     color: rgb(172, 172, 172);
     outline: none;
@@ -108,7 +107,7 @@ body {
 
 .response {
     list-style: none;
-    padding: 0;
+    padding: 2px 0 0 0;
     margin: 0;
     color: rgb(172, 172, 172);
 }
@@ -124,6 +123,7 @@ body {
     cursor: pointer;
 }
 
+
 .response li:nth-child(2n) {
     background-color: #181818;
 }
@@ -131,6 +131,11 @@ body {
 .response li:nth-child(2n+1) {
     background-color: rgb(15, 15, 15);
 }
+
+.response li:first-child {
+    border-radius: 4px 4px 0 0;
+}
+
 
 .response li:last-child {
     border-radius: 0 0 4px 4px;
