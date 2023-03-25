@@ -43,12 +43,15 @@ export function createUl(city: Array<City>, countryParam?: string): Promise<any>
             const lat = city[i].coord.lat as number;
             const lon = city[i].coord.lon as number;
 
+            const selectedCity = city[i]
+
             //add event listener
             newLi.addEventListener('click', async () => {
                 const ul = document.querySelector('.response') as HTMLUListElement
                 ul.remove();
  
                 const res = await getWeather(lat, lon);
+                res.name = selectedCity.name
                 
                 //weather api error handler
                 if (res.cod != 200 || res.serverError) {
