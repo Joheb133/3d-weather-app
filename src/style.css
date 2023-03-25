@@ -14,6 +14,7 @@ body {
     display: flex;
     justify-content: space-between;
     align-items: center;
+    z-index: 2;
 }
 
 .logo {
@@ -238,6 +239,7 @@ section {
 /* 3d */
 
 .canvas-container {
+    position: relative;
     overflow: hidden;
     width: 50%;
     height: 100svh;
@@ -245,6 +247,7 @@ section {
 }
 
 canvas {
-    width: 100%;
-    height: 100%;
+    position: absolute;
+    bottom: 0;
+    right: 0;
 }

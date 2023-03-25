@@ -19,12 +19,19 @@ export class Resizer {
 
     setSize() {
 
-        this.canvas.width = this.HTMLContainer.clientWidth;
-        this.canvas.height = this.HTMLContainer.clientHeight;
-
         //set wdith/height
-        let width = this.canvas.clientWidth;
-        let height = this.canvas.clientHeight
+        let width = this.HTMLContainer.clientWidth;
+        let height = this.HTMLContainer.clientHeight;
+
+        if(width > height) {
+            width = height
+        } else {
+            height = width
+        }
+
+        //set canvas size
+        this.canvas.width = width;
+        this.canvas.height = height;
 
         //set camera aspect ratio
         this.camera.aspect = width / height
