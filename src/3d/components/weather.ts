@@ -9,8 +9,8 @@ export function setWeather(mesh: THREE.Object3D) {
     })
     mesh.position.set(0, 0, 0)
 
-    mesh.traverse((node)=>{
-        if(node.type == 'Mesh') {
+    mesh.traverse((node) => {
+        if (node.type == 'Mesh') {
             node.castShadow = true;
             node.receiveShadow = false;
         }
@@ -48,7 +48,12 @@ export function setRightWeather(group: THREE.Group, name: string) {
 export function weatherAnimation(name: string, animations: [], mixer: THREE.AnimationMixer) {
     //play / stop animations
     animations.forEach((element: any) => {
-        if (element.name == name) {
+        let id = name;
+        //if animation name doesnt have n or d
+        if (element.name.length == 2) {
+            id = id.slice(0, 2)
+        }
+        if (element.name === id) {
             mixer.clipAction(element).play()
         } else {
             mixer.clipAction(element).stop()

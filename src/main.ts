@@ -59,10 +59,10 @@ submitBtn.addEventListener('click', async function () {
             threeApp.rotateEarth(value.coord.lat, value.coord.lon);
 
             //keep weather up to date
-            const interval = setInterval(()=>{
-                updateWeather(value)
-            }, 1000 * 60 * 10)
-            setIntervalRef.push(interval)
+            // const interval = setInterval(()=>{
+            //     updateWeather(value)
+            // }, 1000 * 60 * 10)
+            // setIntervalRef.push(interval)
         })
         .catch((error) => {console.log(error)});
     }
