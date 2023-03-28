@@ -23,7 +23,7 @@ tempBtn.addEventListener("click", () => {
     swapUnit(temp)
 })
 
-export function updateDOM(value: any, tickList: Array<any>){
+export function updateDOM(value: any, tickList?: Array<any>){
     //update DOM elements
     //input
     locInput.value = '';
@@ -47,10 +47,13 @@ export function updateDOM(value: any, tickList: Array<any>){
     const time = new Date().getTime()/1000;
     timeEl.innerText = epochTo24Hour(time+value.timezone)
 
-    const tick = setInterval(()=>{
-        const time = new Date().getTime()/1000;
-        if(timeEl.innerText === epochTo24Hour(time+value.timezone)) return
-        timeEl.innerText = epochTo24Hour(time+value.timezone)
-    }, 1000)
-    tickList.push(tick)
+    //create timer if timer reference list provided
+    if(tickList) {
+        const tick = setInterval(()=>{
+            const time = new Date().getTime()/1000;
+            if(timeEl.innerText === epochTo24Hour(time+value.timezone)) return
+            timeEl.innerText = epochTo24Hour(time+value.timezone)
+        }, 1000)
+        tickList.push(tick)
+    }
 }

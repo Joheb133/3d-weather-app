@@ -47,7 +47,7 @@ export function createUl(city: Array<City>, countryParam?: string): Promise<any>
 
             //add event listener
             newLi.addEventListener('click', async () => {
-                const ul = document.querySelector('.response') as HTMLUListElement
+                const ul = document.querySelector('.response-wrap') as HTMLUListElement
                 ul.remove();
  
                 const res = await getWeather(lat, lon);

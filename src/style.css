@@ -71,7 +71,7 @@ body {
     transition: opacity 400ms;
 }
 
-.search-bar-wrap:hover .response-wrap{
+.search-bar-wrap:hover .response-wrap {
     opacity: 1;
     transition: opacity 400ms 200ms;
 }
@@ -93,6 +93,7 @@ body {
     outline: none;
     opacity: 0;
     transition: opacity 800ms 800ms;
+    font-family: 'Montserrat', sans-serif;
 }
 
 .response-wrap {
@@ -233,11 +234,9 @@ section {
 
 .active-temp {
     color: rgba(255, 255, 255, 1);
-    ;
 }
 
 /* 3d */
-
 .canvas-container {
     position: relative;
     overflow: hidden;
@@ -250,4 +249,56 @@ canvas {
     position: absolute;
     bottom: 0;
     right: 0;
+}
+
+/* device support */
+@media only screen and (max-width: 776px) {
+    /* top */
+    .logo {
+        visibility: hidden;
+        z-index: -1;
+    }
+
+    #temp-toggle-btn {
+        top: 0;
+        bottom: 100%;
+    }
+
+    #time-el {
+        font-size: 1em;
+    }
+
+    .update-wrap span {
+        font-size: 0.75em;
+    }
+
+    /*-- page --*/
+    section {
+        flex-direction: column;
+    }
+
+    /* content */
+    .info {
+        width: 100%;
+        height: 50svh;
+    }
+
+    #location-el {
+        font-size: 1em;
+    }
+    
+    #temp-el {
+        font-size: 10em;
+    }
+    
+    #weather-el {
+        font-size: 1.5em;
+    }
+
+    /* 3d */
+    .canvas-container {
+        width: 100%;
+        height: 50svh;
+        float: right;
+    }
 }
