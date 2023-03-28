@@ -17,5 +17,12 @@ export function returnTimeZone(seconds: number){
         clockHours = `+${Math.abs(timeHours)}`
     }
 
-    return `UTC${clockHours}:${clockMins.toString().padStart(2, '0')}`
+    let time
+    if(timeMins === 0) {
+        time = `UTC${clockHours}`
+    } else {
+        time = `UTC${clockHours}:${clockMins.toString().padStart(2, '0')}`
+    }
+
+    return time
 }
