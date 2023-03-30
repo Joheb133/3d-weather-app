@@ -31,8 +31,8 @@ submitBtn.addEventListener('click', async function () {
     if (document.querySelector('.response-wrap')) document.querySelector('.response-wrap')?.remove();
 
     //clear timers
-    if(setIntervalRef.length > 0){
-        setIntervalRef.forEach(interval =>{
+    if (setIntervalRef.length > 0) {
+        setIntervalRef.forEach(interval => {
             clearInterval(interval)
         })
     }
@@ -46,25 +46,26 @@ submitBtn.addEventListener('click', async function () {
 
     const city = await search(input);
 
-    if (city.error){
+    if (city.error) {
         inputFail(city)
     } else {
         locInput.placeholder = 'City';
         createUl(city, country)
-        .then((value) => {
-            //update DOM based on weather GET
-            updateDOM(value, setIntervalRef)
-            //update 3d enviroment
-            threeApp.weatherAnimation(value.weather[0].icon);
-            threeApp.rotateEarth(value.coord.lat, value.coord.lon);
+            .then((value) => {
+                //update 3d enviroment
+                threeApp.weatherAnimation(value.weather[0].icon);
+                threeApp.rotateEarth(value.coord.lat, value.coord.lon);
 
-            //keep weather up to date
-            // const interval = setInterval(()=>{
-            //     updateWeather(value)
-            // }, 1000 * 60 * 10)
-            // setIntervalRef.push(interval)
-        })
-        .catch((error) => {console.log(error)});
+                //update DOM based on weather GET
+                updateDOM(value, setIntervalRef)
+
+                //keep weather up to date
+                const interval = setInterval(() => {
+                    updateWeather(value)
+                }, 1000 * 60 * 10)
+                setIntervalRef.push(interval)
+            })
+            .catch((error) => { console.log(error) });
     }
     searching = false
 });
@@ -74,7 +75,7 @@ async function updateWeather(value: any) {
     res.name = value.name
 
     //if same weather return
-    if(res === value) return
+    if (res === value) return
 
     updateDOM(res)
     threeApp.weatherAnimation(res.weather[0].icon);

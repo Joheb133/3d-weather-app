@@ -4,7 +4,7 @@ import assets from './components/assets';
 import { createCamera } from './components/camera';
 import { createScene } from './components/scene';
 import { setEarth } from './components/earth';
-import { setRightWeather, setWeather, weatherAnimation } from './components/weather';
+import { displayWeatherIn, displayWeatherOut, setWeather, weatherAnimation } from './components/weather';
 
 import { AssetLoader } from './systems/AssetLoader';
 import { createRenderer } from './systems/renderer';
@@ -68,8 +68,9 @@ export default class World {
         rotateSphere(this.earth, lat, lon)
     }
 
-    weatherAnimation(name: string){
-        setRightWeather(this.weather, name)
+    async weatherAnimation(name: string){
+        await displayWeatherOut(this.weather)
+        displayWeatherIn(this.weather, name)
         weatherAnimation(name, this.items.weather_models.animations, this.mixer)
     };
 };

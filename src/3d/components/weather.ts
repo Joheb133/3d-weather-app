@@ -1,26 +1,26 @@
 import gsap from "gsap"
+import { Vector3 } from "three"
 
 
-export function setWeather(mesh: THREE.Object3D) {
-    mesh.scale.set(0.5, 0.5, 0.5)
-    mesh.children.forEach(element => {
+export function setWeather(group: THREE.Object3D) {
+    group.scale.set(0, 0, 0)
+    group.children.forEach(element => {
         element.position.set(0, 0, 0)
         element.rotation.set(-Math.PI / 2, Math.PI / 1.5, 0)
     })
-    mesh.position.set(0, 0, 0)
+    group.position.set(0, 0, -6.5)
 
-    mesh.traverse((node) => {
+    group.traverse((node) => {
         if (node.type == 'Mesh') {
             node.castShadow = true;
             node.receiveShadow = false;
         }
     })
 
-    return mesh
+    return group
 }
 
-export function setRightWeather(group: THREE.Group, name: string) {
-    group.position.set(0, 0, 0)
+export function displayWeatherIn(group: THREE.Group, name: string) {
 
     //set all assets to invisible
     group.children.forEach(element => {
@@ -36,13 +36,26 @@ export function setRightWeather(group: THREE.Group, name: string) {
         //set right object to visible
         if (element.name === id) {
             element.visible = true;
-            gsap.to(group.position, {
-                z: -6.5,
+            gsap.to(group.scale, {
+                x: 0.5, y: 0.5, z: 0.5,
                 duration: 2,
+                delay: 0.5, //matches duration of out animation
                 ease: 'power2'
             })
         }
     })
+}
+
+//outro animation for weather
+export async function displayWeatherOut(group: THREE.Group) {
+    //hide weather animation
+    if (group.scale.x !== 0 && group.scale.y !== 0 && group.scale.z !== 0) {
+        await gsap.to(group.scale, {
+            x: 0, y: 0, z: 0,
+            duration: 0.5,
+            ease: 'power2'
+        })
+    }
 }
 
 export function weatherAnimation(name: string, animations: [], mixer: THREE.AnimationMixer) {
