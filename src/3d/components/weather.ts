@@ -1,5 +1,4 @@
 import gsap from "gsap"
-import { Vector3 } from "three"
 
 
 export function setWeather(group: THREE.Object3D) {

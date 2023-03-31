@@ -9,6 +9,7 @@ export function createCamera() {
     return camera
 }
 
+// rudamentery camera controller for debugging
 function debugCamera(camera: THREE.PerspectiveCamera) {
     const btnEl = document.createElement('button');
     btnEl.innerText = 'freeMove OFF';
@@ -16,7 +17,7 @@ function debugCamera(camera: THREE.PerspectiveCamera) {
     Object.assign(btnEl.style, {
         position: 'absolute',
         top: '50%',
-        left: '0',
+        right: '0',
         padding: '4px',
         margin: '16px'
     })
