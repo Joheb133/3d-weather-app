@@ -13,6 +13,7 @@ import { createComposer } from './systems/postprocessing';
 
 import { rotateSphere } from './utils/rotateSphere';
 import { createLight } from './components/lighting';
+import { idleAnimations } from './systems/animations';
 
 //create threejs scene
 export default class World {
@@ -40,7 +41,6 @@ export default class World {
         this.earth = setEarth(this.items.earth_model.scene)
         this.weather = setWeather(this.items.weather_models.scene)
         scene.add(this.earth, this.weather)
-        
 
         /* lighting */
         scene.add(new AmbientLight(0xffffff, 0.8));
@@ -54,6 +54,9 @@ export default class World {
         const clock = new Clock()
         const mixer = new AnimationMixer(scene)
         this.mixer = mixer
+
+        /* Handle continous animations */
+        idleAnimations(mixer, this.items.earth_model.animations)
 
         /* animator */
         function animate(){

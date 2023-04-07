@@ -36,7 +36,7 @@ export function displayWeatherIn(group: THREE.Group, name: string) {
         if (element.name === id) {
             element.visible = true;
             gsap.to(group.scale, {
-                x: 0.5, y: 0.5, z: 0.5,
+                x: 0.75, y: 0.75, z: 0.75,
                 duration: 2,
                 delay: 0.5, //matches duration of out animation
                 ease: 'power2'

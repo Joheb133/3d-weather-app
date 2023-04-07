@@ -1,5 +1,6 @@
 uniform vec3 u_circleColor;
 uniform vec3 u_backgroundColor;
+uniform float u_circleRadius;
                       
 varying vec2 vUv;
                       

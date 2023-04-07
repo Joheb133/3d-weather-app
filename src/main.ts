@@ -62,7 +62,7 @@ submitBtn.addEventListener('click', async function () {
                 //keep weather up to date
                 const interval = setInterval(() => {
                     updateWeather(value)
-                }, 1000 * 60 * 10)
+                }, 1000 * 60 * 20)
                 setIntervalRef.push(interval)
             })
             .catch((error) => { console.log(error) });
