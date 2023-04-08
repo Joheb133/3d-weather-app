@@ -5,7 +5,7 @@ export function createCamera() {
     camera.position.set(-2, -2.6, -9.3)//-1.7, -2.6, -9.7
     camera.rotation.set(-3.91, -0.62, -2.99)
 
-    debugCamera(camera)
+    //debugCamera(camera)
     return camera
 }
 
