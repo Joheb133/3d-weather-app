@@ -2,7 +2,7 @@ import { PointLight } from "three";
 
 export function createLight() {
     //light
-    const light = new PointLight(0xffffff, 0.7, 100);
+    const light = new PointLight(0xffffff, 0.8, 100);
     light.position.set(0, 0, -10);
 
     //shadow settings
