@@ -62,7 +62,7 @@ submitBtn.addEventListener('click', async function () {
                 //keep weather up to date
                 const interval = setInterval(() => {
                     updateWeather(value)
-                }, 1000 * 60 * 20)
+                }, 1000 * 60 * 10)
                 setIntervalRef.push(interval)
             })
             .catch((error) => { console.log(error) });
@@ -78,7 +78,7 @@ async function updateWeather(value: any) {
     if (res === value) return
 
     updateDOM(res)
-    threeApp.weatherAnimation(res.weather[0].icon);
+    threeApp.weatherAnimation(res.weather[0].icon, true);
 
     value = res
 }

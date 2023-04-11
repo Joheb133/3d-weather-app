@@ -22,6 +22,7 @@ export default class World {
     private items: any // unedited files
     private weather: any
     private earth: any
+    private currentWeather: any
     constructor() {}
 
     async init(){
@@ -71,9 +72,11 @@ export default class World {
         rotateSphere(this.earth, lat, lon)
     }
 
-    async weatherAnimation(name: string){
+    async weatherAnimation(name: string, sameLocation?: boolean){
+        if(sameLocation && this.currentWeather === name) return //return if updating weather & icon !change
         await displayWeatherOut(this.weather)
         displayWeatherIn(this.weather, name)
         weatherAnimation(name, this.items.weather_models.animations, this.mixer)
+        this.currentWeather = name
     };
 };
