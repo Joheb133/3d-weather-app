@@ -35,20 +35,17 @@ export class Resizer {
 
         //set camera aspect ratio
         this.camera.aspect = width / height
-
+    
         //call project matrix to update camera
         this.camera.updateProjectionMatrix()
 
         //update renderer size
         this.renderer.setSize(width, height, false);
 
-        //set p ratio for mobile, set max to 2
-        this.renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2))
-
         //composer size
         if(this.composer) {
-            console.log(true)
             this.composer.setSize(width, height)
         }
+
     }
 }
