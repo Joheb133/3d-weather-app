@@ -14,7 +14,7 @@ function inputValidate(input: HTMLInputElement["value"]) {
 //search request
 async function getSearch(location: string) {
     try {
-        const res = await fetch(`http://127.0.0.1:5000/search?name=${location}`);
+        const res = await fetch(`/search?name=${location}`);
         const data = await res.json();
         return data
     } catch (error) {

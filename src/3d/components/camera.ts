@@ -10,7 +10,7 @@ export function createCamera() {
 }
 
 // rudamentery camera controller for debugging
-function debugCamera(camera: THREE.PerspectiveCamera) {
+/* function debugCamera(camera: THREE.PerspectiveCamera) {
     const btnEl = document.createElement('button');
     btnEl.innerText = 'freeMove OFF';
     btnEl.id = 'camBtn'
@@ -89,4 +89,4 @@ function debugCamera(camera: THREE.PerspectiveCamera) {
                 break
         }
     })
-}
+} */

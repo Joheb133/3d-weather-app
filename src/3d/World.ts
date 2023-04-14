@@ -9,7 +9,6 @@ import { displayWeatherIn, displayWeatherOut, setWeather, weatherAnimation } fro
 import { AssetLoader } from './systems/AssetLoader';
 import { createRenderer } from './systems/renderer';
 import { Resizer } from './systems/Resizer';
-import { createComposer } from './systems/postprocessing';
 
 import { rotateSphere } from './utils/rotateSphere';
 import { createLight } from './components/lighting';
@@ -34,7 +33,6 @@ export default class World {
         const scene = createScene();
         const renderer = createRenderer();
         const camera = this.camera;
-        const composer = createComposer(renderer, scene, camera)
 
         scene.add(this.camera);
 
@@ -48,7 +46,7 @@ export default class World {
         scene.add(createLight());
         
         /* set sizes */
-        const resizer = new Resizer(camera, renderer, composer);
+        const resizer = new Resizer(camera, renderer);
         resizer.setSize();
 
         /* Configure animation clips */
@@ -63,7 +61,7 @@ export default class World {
         function animate(){
             mixer.update(clock.getDelta())
             requestAnimationFrame(animate)
-            composer.render()
+            renderer.render(scene, camera)
         }
         animate()
     };

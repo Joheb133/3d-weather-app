@@ -6,7 +6,7 @@ export class Resizer {
     constructor(
         private camera: THREE.PerspectiveCamera,
         private renderer: THREE.WebGLRenderer,
-        private composer: EffectComposer) {
+        private composer?: EffectComposer) {
 
         this.canvas = renderer.domElement;
         this.HTMLContainer = this.canvas.parentElement;
@@ -46,6 +46,9 @@ export class Resizer {
         this.renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2))
 
         //composer size
-        this.composer.setSize(width, height)
+        if(this.composer) {
+            console.log(true)
+            this.composer.setSize(width, height)
+        }
     }
 }

@@ -1,14 +1,10 @@
-import { PCFSoftShadowMap, WebGLRenderer, sRGBEncoding, LinearToneMapping } from 'three'
-
-
+import { PCFSoftShadowMap, WebGLRenderer } from 'three'
 
 export function createRenderer() {
     const canvas = document.querySelector('#three-canvas-el') as HTMLCanvasElement
     const renderer = new WebGLRenderer({
         powerPreference: "high-performance",
-        antialias: false,
-        stencil: false,
-        depth: false,
+        antialias: true,
         canvas
     });
 
