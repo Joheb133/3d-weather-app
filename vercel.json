@@ -1,5 +1,10 @@
 {
+    "version": 2,
     "builds": [
+      {
+        "src": "src/vite.config.js",
+        "use": "@vercel/static-build"
+      },
       {
         "src": "server/index.js",
         "use": "@vercel/node"
@@ -7,12 +12,16 @@
     ],
     "routes": [
       {
-        "src": "/api/(.*)",
+        "src": "/api/weather(.*)",
+        "dest": "server/index.js"
+      },
+      {
+        "src": "/api/search(.*)",
         "dest": "server/index.js"
       },
       {
         "src": "/(.*)",
-        "dest": "dist/$1"
+        "dest": "src/dist/$1"
       }
     ]
   }
