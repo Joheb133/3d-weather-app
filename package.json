@@ -4,7 +4,7 @@
   "version": "0.0.0",
   "type": "module",
   "scripts": {
-    "start": "node server/index",
+    "start": "node server/index.js",
     "b-dev": "nodemon server/index",
     "f-dev": "vite",
     "build": "tsc && vite build",

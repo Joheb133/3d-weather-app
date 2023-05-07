@@ -12,7 +12,7 @@ dist
 dist-ssr
 *.local
 .env
-original_data
+local
 server/data/min.city_hash-table.json
 
 # Editor directories and files
@@ -25,3 +25,4 @@ server/data/min.city_hash-table.json
 *.njsproj
 *.sln
 *.sw?
+.vercel
