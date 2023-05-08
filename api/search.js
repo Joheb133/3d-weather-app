@@ -17,7 +17,7 @@ export default async function search(req, res) {
         if (response.statusCode !== 200) {
             res.status(500).json('Failed to load JSON file')
         } else {
-            const data = response.body
+            const data = JSON.parse(response.body)
             //return value in lowercase nondiacritic (no laten symbols like fada)
             const search = req.query.name.toLowerCase().normalize("NFD").replace(/\p{Diacritic}/gu, "")
 
