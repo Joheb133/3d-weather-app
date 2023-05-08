@@ -1,3 +1,5 @@
+//serverless API proxy for weather API
+
 import needle from 'needle';
 import url from 'url';
 
