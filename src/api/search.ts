@@ -14,11 +14,11 @@ function inputValidate(input: HTMLInputElement["value"]) {
 //search request
 async function getSearch(location: string) {
     try {
-        const res = await fetch(`/search?name=${location}`);
+        const res = await fetch(`/api/search?name=${location}`);
         const data = await res.json();
         return data
     } catch (error) {
-        return { error: 'server error' }
+        return { error: `server error` }
     }
 }
 
