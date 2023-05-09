@@ -1,6 +1,7 @@
 //serverless city search
 
 import needle from 'needle';
+import zlib from 'zlib'
 
 function constant(data, search) {
     let searchList = data[search]
@@ -12,12 +13,13 @@ function constant(data, search) {
 
 export default async function search(req, res) {
     try {
-        const response = await needle('get', `https://raw.githubusercontent.com/Joheb133/3d-weather-app/main/data/hash_city.json`)
+        const response = await needle('get', `https://raw.githubusercontent.com/Joheb133/3d-weather-app/main/data/hash_city.json.gz`)
+        const decompressed = zlib.gunzipSync(response.body)
 
         if (response.statusCode !== 200) {
             res.status(500).json('Failed to load JSON file')
         } else {
-            const data = JSON.parse(response.body)
+            const data = JSON.parse(decompressed)
             //return value in lowercase nondiacritic (no laten symbols like fada)
             const search = req.query.name.toLowerCase().normalize("NFD").replace(/\p{Diacritic}/gu, "")
 
@@ -25,6 +27,6 @@ export default async function search(req, res) {
         }
 
     } catch (error) {
-        res.status(500).json(error.message)
+        res.status(500).json(error.message``)
     }
 }
