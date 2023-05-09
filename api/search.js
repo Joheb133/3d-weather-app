@@ -11,14 +11,15 @@ function constant(data, search) {
     return searchList
 }
 
+let CACHE = await needle('get', `https://raw.githubusercontent.com/Joheb133/3d-weather-app/main/data/hash_city.json.gz`)
+
 export default async function search(req, res) {
     try {
-        const response = await needle('get', `https://raw.githubusercontent.com/Joheb133/3d-weather-app/main/data/hash_city.json.gz`)
-
-        if (response.statusCode !== 200) {
+        if (CACHE.statusCode !== 200) {
+            CACHE = await needle('get', `https://raw.githubusercontent.com/Joheb133/3d-weather-app/main/data/hash_city.json.gz`)
             res.status(500).json('Failed to load JSON file')
         } else {
-            const decompressed = zlib.gunzipSync(response.body)
+            const decompressed = zlib.gunzipSync(CACHE.body)
             const data = JSON.parse(decompressed)
             //return value in lowercase nondiacritic (no laten symbols like fada)
             const search = req.query.name.toLowerCase().normalize("NFD").replace(/\p{Diacritic}/gu, "")
