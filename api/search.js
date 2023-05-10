@@ -22,7 +22,7 @@ export default async function search(req, res) {
         let data = cache.get(CACHE_KEY);
 
         if (!data) {
-            const response = await needle('get', `https://raw.githubusercontent.com/Joheb133/3d-weather-app/main/data/hash_city_2.json.gz`);
+            const response = await needle('get', `https://raw.githubusercontent.com/Joheb133/3d-weather-app/main/data/hash_city.json.gz`);
             if (response.statusCode !== 200) {
                 res.status(500).json('Failed to load JSON file')
                 return;
