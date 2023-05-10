@@ -45,7 +45,6 @@ submitBtn.addEventListener('click', async function () {
     }
 
     const city = await search(input);
-    console.log(city)
 
     if (city.error) {
         inputFail(city)
