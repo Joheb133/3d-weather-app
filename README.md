@@ -20,5 +20,7 @@ The data from the file is cached for 1 day, which is longer than the serverless 
 Make sure vercel CLI is installed globally
 ```
 npm install
-npm start
+vercel env add API_KEY_VALUE yourApiKey
+vercel env add API_KEY_NAME appid
+npm start or vercel dev
 ```
