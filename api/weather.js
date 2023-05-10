@@ -12,7 +12,7 @@ export default async function weather(req, res) {
         const apiRes = await needle('get', `https://api.openweathermap.org/data/2.5/weather?${params}`)
         const data = apiRes.body
 
-        res.setHeader('Cache-Control', 's-maxage=300')
+        res.setHeader('Cache-Control', 's-maxage=600')
         res.status(200).json(data)
     } catch (error) {
         res.status(500).json({ error })

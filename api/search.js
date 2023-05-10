@@ -12,7 +12,7 @@ function constant(data, search) {
     return searchList
 }
 
-const CACHE_DURATION_MS = 60 * 60 * 1000; // 1 hour
+const CACHE_DURATION_MS = 24 * 60 * 60 * 1000; // 1 day
 const CACHE_KEY = 'city_data';
 
 export default async function search(req, res) {
