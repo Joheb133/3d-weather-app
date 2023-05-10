@@ -3,7 +3,7 @@
 
 This repo contains the code for my 3d weather website. I used [Threejs](https://threejs.org/) to create the 3d enviroment and [openweather](https://openweathermap.org/) for weather data.
 
-![](https://raw.githubusercontent.com/Joheb133/3d-weather-app/main/repo_files/weather-3d.gif)
+![](https://raw.githubusercontent.com/Joheb133/3d-weather-app/main/public/weather-3d.gif)
 
 ## Backend info
 GET requests are handled using vercel's serverless infastructure. To run the project locally, you'll need to install [vercel CLI](https://vercel.com/docs/cli). You'll also need to get an API key from [openweather](https://openweathermap.org/price "Openweather's API's"), make sure to scroll down to "Professional collections" and select any tier. Here are the [API docs](https://openweathermap.org/current), make sure you get the key for openweathers weather 2.5 API not their new 3.0 API.
