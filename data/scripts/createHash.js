@@ -52,11 +52,10 @@ async function createMap(data) {
     data.forEach(element => {
         const keyLower = element.name.toLowerCase().normalize("NFD").replace(/\p{Diacritic}/gu, "");
         if (obj.hasOwnProperty(keyLower)) {
-            obj[keyLower].push(element)
+            obj[keyLower].push(element.country, element.coord)
         } else {
-            obj[keyLower] = [element];
+            obj[keyLower] = [element.country, element.coord];
         }
-
     })
     return obj
 }
