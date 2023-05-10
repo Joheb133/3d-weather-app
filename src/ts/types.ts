@@ -4,12 +4,14 @@ export interface Obj{
 }
 
 export interface City {
-    id: number;
-    name: string;
-    state: string;
-    country: string;
-    coord: {
-        lon: number;
-        lat: number;
-    };
+    name: string,
+    data: [
+        {
+            country: string,
+            coord: {
+                lon: number,
+                lat: number
+            }
+        }
+    ]
 }
