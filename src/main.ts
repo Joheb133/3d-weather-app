@@ -20,7 +20,12 @@ let searching = false;
 //store timers
 let setIntervalRef: Array<any> = [];
 
-submitBtn.addEventListener('click', async function () {
+locInput.addEventListener('input', () => {
+    //set opacity 1 if locInput has input
+    locInput.value ? locInput.style.opacity = "1" : locInput.style.opacity = ""
+})
+
+submitBtn.addEventListener('click', async () => {
     if (searching) return
     searching = true
 
@@ -82,3 +87,4 @@ async function updateWeather(value: any) {
 
     value = res
 }
+
