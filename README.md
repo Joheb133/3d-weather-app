@@ -12,7 +12,7 @@ GET requests are handled using vercel's serverless infastructure. To run the pro
 Used as a proxy to hide enviroment variables from client. Vercel cache control caches response for 10 minutes, this prevents unnecessary request to weather API.
 
 #### Search API
-As part of openweathers API, you can search for city's, this uses up API request limit so I've coded my own way of searching. A file storing city data, which I got from openweather, is stored in the data folder. The data folder contains the original.json, the minified version that uses hash tables to make for quick searches. The .gz file is a compressed file that halfs GET request time. 
+As part of openweathers API, you can search for city's, this uses up API request limit so I've coded my own way of searching. A file storing city data, which I got from openweather, is stored in the data folder. The data folder contains the original.json, the minified version that utilises objects to make for quick searches. The .gz file is a compressed file that halfs GET request time. 
 
 The data from the file is cached for 1 day, which is longer than the serverless functions lifespan. Feel free to find a better hosting method for the hash_cty.json. For reliability it's best you host the file yourself incase this repo is ever deleted or restructured. 
 
